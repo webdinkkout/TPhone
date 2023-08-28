@@ -1,0 +1,148 @@
+/* Header */
+
+.wrapper-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  position: fixed;
+  left: 300px;
+  top: 0;
+  right: 0;
+
+  padding: 16px;
+  height: 80px;
+  box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+  background-color: #fff;
+}
+
+.header__user {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.header__user > img {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+}
+
+.header__search {
+}
+
+.header__search > i {
+  font-size: 1.5rem;
+}
+
+.logo {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 300px;
+  background-color: #fff;
+  z-index: 99;
+
+  display: block;
+
+  padding: 16px;
+  height: 80px;
+
+  text-align: center;
+  font-weight: var(--font-bold);
+  font-size: 1.5rem;
+
+  border-bottom: 1px solid var(--alpha-color-dark-2);
+}
+
+/* Sidebar */
+.sidebar {
+  box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+  height: 100vh;
+  overflow: auto;
+  padding-top: 80px;
+}
+
+.group-menu {
+  margin-top: 16px;
+  border-bottom: 1px solid var(--alpha-color-dark-2);
+}
+
+.sidebar__title {
+  margin-left: 8px;
+  font-size: 0.75rem;
+  font-weight: var(--font-bold);
+}
+.sidebar__list {
+}
+.sidebar__item {
+  padding-left: 12px;
+  transition: 0.3s;
+}
+
+.sidebar__item.sidebar__item--dashboard {
+  border-bottom: 1px solid var(--alpha-color-dark-2);
+  padding: 8px 0;
+  padding-left: 12px;
+}
+
+.sidebar__item:hover {
+  background-color: var(--alpha-color-dark-2);
+  cursor: pointer;
+}
+
+.sidebar__link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 8px;
+
+  font-size: 1rem;
+
+  user-select: none;
+}
+
+.sidebar__drop-icon {
+  transform: rotate(180deg);
+
+  transition: 0.3s;
+}
+
+.sidebar__sub-list {
+  visibility: hidden;
+  opacity: 0;
+  height: 0;
+  transform: translateX(-100%);
+  margin-left: 16px;
+
+  transition: 0.2s ease-in;
+}
+
+.sidebar__sub-list.active {
+  visibility: visible;
+  height: 100%;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.sidebar__sub-item:hover .sidebar__sub-link {
+  background-color: var(--alpha-color-dark-2);
+}
+
+.sidebar__sub-link {
+  display: block;
+  padding: 8px;
+
+  transition: 0.3s;
+}
+
+/* Main */
+.wrapper-main {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+}
+
+.wrapper-content {
+  padding-top: 88px;
+}

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - CellPhoneS</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/CellPhoneS.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+</head>
+<body>
+    <header class="">
+        <div class="wrapper-header">
+            <div class="header__left">
+                <button class="header__search"><i class="bi bi-search"></i></button>
+            </div>
+            <div class="header__right">
+                <div class="header__user">
+                    <img src="/images/user.png" alt="user">
+                    <a href="/User">
+                        Admin 
+                        <i class="bi bi-caret-down-fill"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="wrapper-main">
+        <section class="sidebar">
+            <a href="/Admin" class="logo">
+                Admintor
+            </a>
+            <div>
+                <ul class="sidebar__list">
+                    <li class="sidebar__item sidebar__item--dashboard">
+                        <a href="/Admin" class="sidebar__link"><i class="bi bi-speedometer"></i> <span>Dashboard</span> </a>
+                    </li>
+                </ul>
+
+                <div class="group-menu">
+                    <span class="sidebar__title">
+                        <i class="bi bi-table"></i>
+                        Tables
+                    </span>
+
+                    <ul class="sidebar__list">
+                        <li class="sidebar__item">
+                            <p class="sidebar__link"><i class="bi bi-collection"></i> <span>Product Categories</span> <i class="bi bi-caret-down"></i> </p>
+                                <ul class="sidebar__sub-list">
+                                    <li class="sidebar__sub-item">
+                                        <a href="/Admin/ProductCategories"  class="sidebar__sub-link"><i class="bi bi-easel"></i> <span>Read</span> </a>
+                                    </li>
+                                    <li class="sidebar__sub-item">
+                                        <a href="/Admin/ProductCategories/Create" class="sidebar__sub-link"><i class="bi bi-plus-circle"></i> <span>Create</span> </a>
+                                    </li>
+                                    <li class="sidebar__sub-item">
+                                        <a href="/Admin/ProductCategories/Edit"  class="sidebar__sub-link"><i class="bi bi-pencil-square"></i> <span>Edit</span> </a>
+                                    </li>
+                                </ul>
+                        </li>
+                        <li class="sidebar__item">
+                            <p  class="sidebar__link"><i class="bi bi-phone"></i> <span>Products</span> <i class="bi bi-caret-down"></i> </p>
+                            <ul class="sidebar__sub-list">
+                                <li class="sidebar__sub-item">
+                                    <a href="#"  class="sidebar__sub-link"><i class="bi bi-easel"></i> <span>Read</span> </a>
+                                </li>
+                                <li class="sidebar__sub-item">
+                                    <a href="#" class="sidebar__sub-link"><i class="bi bi-plus-circle"></i> <span>Create</span> </a>
+                                </li>
+                                <li class="sidebar__sub-item">
+                                    <a href="#"  class="sidebar__sub-link"><i class="bi bi-pencil-square"></i> <span>Edit</span> </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="group-menu">
+                    <span class="sidebar__title">
+                        <i class="bi bi-graph-up"></i>
+                        Charts
+                    </span>
+
+                    <ul class="sidebar__list">
+                        <li class="sidebar__item">
+                            <p class="sidebar__link"><i class="bi bi-phone"></i> <span>Iphone</span> <i class="bi bi-caret-down"></i></p>
+                                <ul class="sidebar__sub-list">
+                                    <li class="sidebar__sub-item">
+                                        <a href="#"  class="sidebar__sub-link"><i class="bi bi-box-seam"></i> <span>13 Promax</span> </a>
+                                    </li>
+                                    <li class="sidebar__sub-item">
+                                        <a href="#" class="sidebar__sub-link"><i class="bi bi-box-seam"></i> <span>12 Promax</span> </a>
+                                    </li>
+                                    <li class="sidebar__sub-item">
+                                        <a href="#"  class="sidebar__sub-link"><i class="bi bi-box-seam"></i> <span>11 Pro</span> </a>
+                                    </li>
+                                </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="group-menu">
+                    <span class="sidebar__title">
+                      <i class="bi bi-segmented-nav"></i>
+                        Navs
+                    </span>
+
+                    <ul class="sidebar__list">
+                        <li class="sidebar__item">
+                            <a href="#" class="sidebar__link"><i class="bi bi-gear"></i> <span>Settings</span> </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="group-menu">
+                    <span class="sidebar__title">
+                        <i class="bi bi-person-circle"></i>
+                        User
+                    </span>
+
+                    <ul class="sidebar__list">
+                        <li class="sidebar__item">
+                            <a href="#" class="sidebar__link"><i class="bi bi-gear"></i> <span>Settings</span> </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+        <main class="wrapper-content">
+            <partial name="_Toast" />
+            @RenderBody()
+        </main>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
