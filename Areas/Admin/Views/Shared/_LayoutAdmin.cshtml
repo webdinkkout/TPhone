@@ -17,9 +17,9 @@
         <div class="wrapper-header">
             <div class="header__left">
                 <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Tìm kiếm từ khóa.." aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
+                                <button class="btn btn-primary" type="button" title="Tìm kiếm">
                                     <i class="bi bi-search"></i>
                                 </button>
                             </div>
@@ -37,91 +37,119 @@
         </div>
     </header>
     <div class="wrapper-main">
-        <section class="sidebar">
+        <section class="sidebar ">
             <a href="/Admin" class="logo">
                 Admintor
             </a>
-            <div>
+            <div class="">
                 <ul class="sidebar__list">
                     <li class="sidebar__item sidebar__item--dashboard">
-                        <a href="/Admin" class="sidebar__link"><i class="bi bi-speedometer"></i> <span>Dashboard</span> </a>
+                        <a href="/Admin" class="sidebar__link"><i class="bi bi-speedometer"></i> <span>Bảng điều khiển</span> </a>
                     </li>
                 </ul>
 
                 <div class="group-menu">
                     <span class="sidebar__title">
                         <i class="bi bi-table"></i>
-                        Tables
+                        Các bản
                     </span>
 
                     <ul class="sidebar__list">
                         <li class="sidebar__item">
-                            <p class="sidebar__link"><i class="bi bi-collection"></i> <span>Product Categories</span> <i class="bi bi-caret-down"></i> </p>
+                            <p class="sidebar__link"><i class="bi bi-collection"></i> <span>Danh mục sản phẩm</span> <i class="bi bi-caret-down"></i> </p>
                                 <ul class="sidebar__sub-list">
                                     <li class="sidebar__sub-item">
-                                        <a href="/Admin/ProductCategories"  class="sidebar__sub-link"><i class="bi bi-easel"></i> <span>Read</span> </a>
+                                        <a href="/Admin/ProductCategories"  class="sidebar__sub-link"><i class="bi bi-easel"></i> <span>Tất cả</span> </a>
                                     </li>
                                     <li class="sidebar__sub-item">
-                                        <a href="/Admin/ProductCategories/Create" class="sidebar__sub-link"><i class="bi bi-plus-circle"></i> <span>Create</span> </a>
+                                        <a href="/Admin/ProductCategories/Tạo mới" class="sidebar__sub-link"><i class="bi bi-plus-circle"></i> <span>Tạo mới</span> </a>
                                     </li>
                                     <li class="sidebar__sub-item">
-                                        <a href="/Admin/ProductCategories/Edit"  class="sidebar__sub-link"><i class="bi bi-pencil-square"></i> <span>Edit</span> </a>
+                                        <a href="/Admin/ProductCategories/Chỉnh sửa"  class="sidebar__sub-link"><i class="bi bi-pencil-square"></i> <span>Chỉnh sửa</span> </a>
                                     </li>
                                 </ul>
                         </li>
                         <li class="sidebar__item">
-                            <p  class="sidebar__link"><i class="bi bi-phone"></i> <span>Products</span> <i class="bi bi-caret-down"></i> </p>
+                            <p  class="sidebar__link"><i class="bi bi-phone"></i> <span>Sản phẩm</span> <i class="bi bi-caret-down"></i> </p>
                             <ul class="sidebar__sub-list">
                                 <li class="sidebar__sub-item">
-                                    <a href="#"  class="sidebar__sub-link"><i class="bi bi-easel"></i> <span>Read</span> </a>
+                                    <a href="#"  class="sidebar__sub-link"><i class="bi bi-easel"></i> <span>Tất cả</span> </a>
                                 </li>
                                 <li class="sidebar__sub-item">
-                                    <a href="#" class="sidebar__sub-link"><i class="bi bi-plus-circle"></i> <span>Create</span> </a>
+                                    <a href="#" class="sidebar__sub-link"><i class="bi bi-plus-circle"></i> <span>Tạo mới</span> </a>
                                 </li>
                                 <li class="sidebar__sub-item">
-                                    <a href="#"  class="sidebar__sub-link"><i class="bi bi-pencil-square"></i> <span>Edit</span> </a>
+                                    <a href="#"  class="sidebar__sub-link"><i class="bi bi-pencil-square"></i> <span>Chỉnh sửa</span> </a>
                                 </li>
                             </ul>
                         </li>
                         <li class="sidebar__item">
-                            <p  class="sidebar__link"><i class="bi bi-briefcase"></i> <span>Brands</span> <i class="bi bi-caret-down"></i> </p>
+                            <p  class="sidebar__link"><i class="bi bi-briefcase"></i> <span>Nhãn hiệu</span> <i class="bi bi-caret-down"></i> </p>
                             <ul class="sidebar__sub-list">
                                 <li class="sidebar__sub-item">
-                                    <a href="#"  class="sidebar__sub-link"><i class="bi bi-easel"></i> <span>Read</span> </a>
+                                    <a href="#"  class="sidebar__sub-link"><i class="bi bi-easel"></i> <span>Tất cả</span> </a>
                                 </li>
                                 <li class="sidebar__sub-item">
-                                    <a href="#" class="sidebar__sub-link"><i class="bi bi-plus-circle"></i> <span>Create</span> </a>
+                                    <a href="#" class="sidebar__sub-link"><i class="bi bi-plus-circle"></i> <span>Tạo mới</span> </a>
                                 </li>
                                 <li class="sidebar__sub-item">
-                                    <a href="#"  class="sidebar__sub-link"><i class="bi bi-pencil-square"></i> <span>Edit</span> </a>
+                                    <a href="#"  class="sidebar__sub-link"><i class="bi bi-pencil-square"></i> <span>Chỉnh sửa</span> </a>
                                 </li>
                             </ul>
                         </li>
                         <li class="sidebar__item">
-                            <p  class="sidebar__link"><i class="bi bi-house-door"></i> <span>Suppliers</span> <i class="bi bi-caret-down"></i> </p>
+                            <p  class="sidebar__link"><i class="bi bi-house-door"></i> <span>Nhà cung cấp</span> <i class="bi bi-caret-down"></i> </p>
                             <ul class="sidebar__sub-list">
                                 <li class="sidebar__sub-item">
-                                    <a href="#"  class="sidebar__sub-link"><i class="bi bi-easel"></i> <span>Read</span> </a>
+                                    <a href="#"  class="sidebar__sub-link"><i class="bi bi-easel"></i> <span>Tất cả</span> </a>
                                 </li>
                                 <li class="sidebar__sub-item">
-                                    <a href="#" class="sidebar__sub-link"><i class="bi bi-plus-circle"></i> <span>Create</span> </a>
+                                    <a href="#" class="sidebar__sub-link"><i class="bi bi-plus-circle"></i> <span>Tạo mới</span> </a>
                                 </li>
                                 <li class="sidebar__sub-item">
-                                    <a href="#"  class="sidebar__sub-link"><i class="bi bi-pencil-square"></i> <span>Edit</span> </a>
+                                    <a href="#"  class="sidebar__sub-link"><i class="bi bi-pencil-square"></i> <span>Chỉnh sửa</span> </a>
                                 </li>
                             </ul>
                         </li>
                         <li class="sidebar__item">
-                            <p  class="sidebar__link"><i class="bi bi-bag"></i> <span>Orders</span> <i class="bi bi-caret-down"></i> </p>
+                            <p  class="sidebar__link"><i class="bi bi-bag"></i> <span>Đơn hàng</span> <i class="bi bi-caret-down"></i> </p>
                             <ul class="sidebar__sub-list">
                                 <li class="sidebar__sub-item">
-                                    <a href="#"  class="sidebar__sub-link"><i class="bi bi-easel"></i> <span>Read</span> </a>
+                                    <a href="#"  class="sidebar__sub-link"><i class="bi bi-easel"></i> <span>Tất cả</span> </a>
                                 </li>
                                 <li class="sidebar__sub-item">
-                                    <a href="#" class="sidebar__sub-link"><i class="bi bi-plus-circle"></i> <span>Create</span> </a>
+                                    <a href="#" class="sidebar__sub-link"><i class="bi bi-plus-circle"></i> <span>Tạo mới</span> </a>
                                 </li>
                                 <li class="sidebar__sub-item">
-                                    <a href="#"  class="sidebar__sub-link"><i class="bi bi-pencil-square"></i> <span>Edit</span> </a>
+                                    <a href="#"  class="sidebar__sub-link"><i class="bi bi-pencil-square"></i> <span>Chỉnh sửa</span> </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="sidebar__item">
+                            <p  class="sidebar__link"><i class="bi bi-file-earmark-easel"></i> <span>Slides</span> <i class="bi bi-caret-down"></i> </p>
+                            <ul class="sidebar__sub-list">
+                                <li class="sidebar__sub-item">
+                                    <a href="#"  class="sidebar__sub-link"><i class="bi bi-easel"></i> <span>Tất cả</span> </a>
+                                </li>
+                                <li class="sidebar__sub-item">
+                                    <a href="#" class="sidebar__sub-link"><i class="bi bi-plus-circle"></i> <span>Tạo mới</span> </a>
+                                </li>
+                                <li class="sidebar__sub-item">
+                                    <a href="#"  class="sidebar__sub-link"><i class="bi bi-pencil-square"></i> <span>Chỉnh sửa</span> </a>
+                                </li>
+                            </ul>
+                        </li>
+                         <li class="sidebar__item">
+                            <p  class="sidebar__link"><i class="bi bi-file-earmark-person"></i> <span>Giới thiệu</span> <i class="bi bi-caret-down"></i> </p>
+                            <ul class="sidebar__sub-list">
+                                <li class="sidebar__sub-item">
+                                    <a href="#"  class="sidebar__sub-link"><i class="bi bi-easel"></i> <span>Tất cả</span> </a>
+                                </li>
+                                <li class="sidebar__sub-item">
+                                    <a href="#" class="sidebar__sub-link"><i class="bi bi-plus-circle"></i> <span>Tạo mới</span> </a>
+                                </li>
+                                <li class="sidebar__sub-item">
+                                    <a href="#"  class="sidebar__sub-link"><i class="bi bi-pencil-square"></i> <span>Chỉnh sửa</span> </a>
                                 </li>
                             </ul>
                         </li>
@@ -131,12 +159,25 @@
                 <div class="group-menu">
                     <span class="sidebar__title">
                       <i class="bi bi-segmented-nav"></i>
-                        Navs
+                        Thanh điều hướng
                     </span>
 
                     <ul class="sidebar__list">
                         <li class="sidebar__item">
-                            <a href="#" class="sidebar__link"><i class="bi bi-gear"></i> <span>Settings</span> </a>
+                            <a href="#" class="sidebar__link"><i class="bi bi-pencil-square"></i> <span>Chỉnh sửa</span> </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="group-menu">
+                    <span class="sidebar__title">
+                      <i class="bi bi-segmented-nav"></i>
+                        Feedback
+                    </span>
+
+                    <ul class="sidebar__list">
+                        <li class="sidebar__item">
+                            <a href="#" class="sidebar__link"><i class="bi bi-eye"></i> <span>Xem</span> </a>
                         </li>
                     </ul>
                 </div>
@@ -144,12 +185,12 @@
                 <div class="group-menu">
                     <span class="sidebar__title">
                         <i class="bi bi-person-circle"></i>
-                        User
+                        Cá nhân
                     </span>
 
                     <ul class="sidebar__list">
                         <li class="sidebar__item">
-                            <a href="#" class="sidebar__link"><i class="bi bi-gear"></i> <span>Settings</span> </a>
+                            <a href="#" class="sidebar__link"><i class="bi bi-gear"></i> <span>Cài đặt</span> </a>
                         </li>
                     </ul>
                 </div>
