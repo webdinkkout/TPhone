@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - CellPhoneS</title>
     
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -16,7 +16,14 @@
     <header class="">
         <div class="wrapper-header">
             <div class="header__left">
-                <button class="header__search"><i class="bi bi-search"></i></button>
+                <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="bi bi-search"></i>
+                                </button>
+                            </div>
+                        </div>
             </div>
             <div class="header__right">
                 <div class="header__user">
@@ -76,32 +83,51 @@
                                 </li>
                             </ul>
                         </li>
-                    </ul>
-                </div>
-
-                <div class="group-menu">
-                    <span class="sidebar__title">
-                        <i class="bi bi-graph-up"></i>
-                        Charts
-                    </span>
-
-                    <ul class="sidebar__list">
                         <li class="sidebar__item">
-                            <p class="sidebar__link"><i class="bi bi-phone"></i> <span>Iphone</span> <i class="bi bi-caret-down"></i></p>
-                                <ul class="sidebar__sub-list">
-                                    <li class="sidebar__sub-item">
-                                        <a href="#"  class="sidebar__sub-link"><i class="bi bi-box-seam"></i> <span>13 Promax</span> </a>
-                                    </li>
-                                    <li class="sidebar__sub-item">
-                                        <a href="#" class="sidebar__sub-link"><i class="bi bi-box-seam"></i> <span>12 Promax</span> </a>
-                                    </li>
-                                    <li class="sidebar__sub-item">
-                                        <a href="#"  class="sidebar__sub-link"><i class="bi bi-box-seam"></i> <span>11 Pro</span> </a>
-                                    </li>
-                                </ul>
+                            <p  class="sidebar__link"><i class="bi bi-briefcase"></i> <span>Brands</span> <i class="bi bi-caret-down"></i> </p>
+                            <ul class="sidebar__sub-list">
+                                <li class="sidebar__sub-item">
+                                    <a href="#"  class="sidebar__sub-link"><i class="bi bi-easel"></i> <span>Read</span> </a>
+                                </li>
+                                <li class="sidebar__sub-item">
+                                    <a href="#" class="sidebar__sub-link"><i class="bi bi-plus-circle"></i> <span>Create</span> </a>
+                                </li>
+                                <li class="sidebar__sub-item">
+                                    <a href="#"  class="sidebar__sub-link"><i class="bi bi-pencil-square"></i> <span>Edit</span> </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="sidebar__item">
+                            <p  class="sidebar__link"><i class="bi bi-house-door"></i> <span>Suppliers</span> <i class="bi bi-caret-down"></i> </p>
+                            <ul class="sidebar__sub-list">
+                                <li class="sidebar__sub-item">
+                                    <a href="#"  class="sidebar__sub-link"><i class="bi bi-easel"></i> <span>Read</span> </a>
+                                </li>
+                                <li class="sidebar__sub-item">
+                                    <a href="#" class="sidebar__sub-link"><i class="bi bi-plus-circle"></i> <span>Create</span> </a>
+                                </li>
+                                <li class="sidebar__sub-item">
+                                    <a href="#"  class="sidebar__sub-link"><i class="bi bi-pencil-square"></i> <span>Edit</span> </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="sidebar__item">
+                            <p  class="sidebar__link"><i class="bi bi-bag"></i> <span>Orders</span> <i class="bi bi-caret-down"></i> </p>
+                            <ul class="sidebar__sub-list">
+                                <li class="sidebar__sub-item">
+                                    <a href="#"  class="sidebar__sub-link"><i class="bi bi-easel"></i> <span>Read</span> </a>
+                                </li>
+                                <li class="sidebar__sub-item">
+                                    <a href="#" class="sidebar__sub-link"><i class="bi bi-plus-circle"></i> <span>Create</span> </a>
+                                </li>
+                                <li class="sidebar__sub-item">
+                                    <a href="#"  class="sidebar__sub-link"><i class="bi bi-pencil-square"></i> <span>Edit</span> </a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </div>
+
                 <div class="group-menu">
                     <span class="sidebar__title">
                       <i class="bi bi-segmented-nav"></i>

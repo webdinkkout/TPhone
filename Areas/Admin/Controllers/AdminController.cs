@@ -16,7 +16,7 @@ public class AdminController : Controller
         return View();
     }
 
-    [HttpGet]
+    [HttpGet("Admin/Login")]
     public IActionResult Login()
     {
         var isLogged = true;

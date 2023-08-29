@@ -9,11 +9,18 @@
     <section>
         <h2>Chỉnh sửa danh mục</h2>
         <hr>
-        <form asp-action="Update" method="POST">
+        <form asp-action="Update" method="POST" enctype="multipart/form-data">
             <input hidden asp-for="Id">
+            <input hidden asp-for="ThumbnailFilePath">
             <div class="form-group">
                 <label for="txtName" class="form-label">Tên danh mục</label>
                 <input asp-for="Name" id="txtName" class="form-control" placeholder="Nhập tên danh mục">
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="fileThumbnail" class="form-label">Ảnh đại diện</label>
+                <input name="fileThumbnail" type="file" accept="image/*" id="ulfThumbnail" class="form-control" >
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
 

@@ -27,7 +27,7 @@ public class ProductCategoryController : Controller
 
         foreach (var item in categoriesRes)
         {
-            categoriesViewModel.Add(new CategoryViewModel(item.Id, item.Name, item.ThumbnailFilePath));
+            categoriesViewModel.Add(new CategoryViewModel(item.Id, item.Name, item.SeoName, item.ThumbnailFilePath));
         }
 
         return View(categoriesViewModel);
@@ -87,19 +87,29 @@ public class ProductCategoryController : Controller
     }
 
     [HttpPost("Admin/ProductCategories/Update/{id?}")]
-    public IActionResult Update(EditProductCategory payload)
+    public IActionResult Update(EditProductCategory payload, IFormFile? fileThumbnail)
     {
         TempData["TOAST"] = "ERROR|Chỉnh sửa không thành công";
         if (!ModelState.IsValid)
         {
-            return View();
+            return RedirectToAction("Edit", new { id = payload.Id });
         }
+
+        if (fileThumbnail != null)
+        {
+            new HandleFile("images/category").Delete(payload.ThumbnailFilePath.Split('/').Last());
+        }
+
+        string[] thumbnailAttr = new HandleFile("images/category").Save(fileThumbnail!);
+        string seoName = HandleSeoName.GenerateSEOName(payload.Name);
 
         var updateProductCategory = new ProductCategory
         {
             Id = payload.Id,
             Name = payload.Name,
-            ThumbnailFileName = payload.ThumbnailFilePath,
+            ThumbnailFileName = fileThumbnail != null ? thumbnailAttr[0] : payload?.ThumbnailFilePath?.Split('/').Last(),
+            ThumbnailFilePath = fileThumbnail != null ? thumbnailAttr[1] : payload?.ThumbnailFilePath,
+            SeoName = seoName
         };
 
         var isUpdatedSuccess = this.productCategoryService.Update(updateProductCategory);

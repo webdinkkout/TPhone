@@ -10,13 +10,13 @@ function handleDeleteAlert({ id, icon, title, message, confirmTitle }) {
         cancelButtonText: 'Cancel'
     }).then((result) => {
         if (result.isConfirmed) {
-            fetch(`/Admin/PhoneCategories/Delete/${id}`).then(() => {
+            fetch(`/Admin/ProductCategories/Delete/${id}`).then(() => {
                 Swal.fire(
                     'Deleted!',
                     'Deleted Successfully!',
                     'success'
                 ).then(() => {
-                    window.location.href = "/Admin/PhoneCategories";
+                    window.location.href = "/Admin/ProductCategories";
                 })
             });
         }

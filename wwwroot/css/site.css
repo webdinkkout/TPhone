@@ -18,6 +18,9 @@
   --alpha-color-light-4: rgba(255, 255, 255, 0.4);
   --alpha-color-light-6: rgba(255, 255, 255, 0.6);
   --alpha-color-light-8: rgba(255, 255, 255, 0.8);
+
+  --text-gray-300: #dddfeb;
+  --text-gray-800: #5a5c69;
 }
 
 * {
@@ -66,4 +69,15 @@ button {
   outline: none;
   cursor: pointer;
   background-color: transparent;
+}
+
+.table-image {
+  td,
+  th {
+    vertical-align: middle;
+  }
+}
+
+.shadown {
+  box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15) !important;
 }
