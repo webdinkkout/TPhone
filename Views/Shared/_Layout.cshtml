@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - CellPhoneS</title>
+    <title>@ViewData["Title"] - T Phone</title>
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     
@@ -13,18 +13,55 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 </head>
 <body>
-    <header>
-        header
-    </header>
     <div class="container">
-        <main>
-            <partial name="_Toast" />
-            @RenderBody()
-        </main>
+        <header>
+            <div class="header container">
+                <div class="header__left">
+                    <a href="/" class="logo">T</a>
+                    <nav class="nav">
+                        <a href="#">Laptop</a>
+                        <a href="#">Điện thoại</a>
+                        <a href="#">Máy tính để bàn</a>
+                        <a href="#">Tai nghe</a>
+                        <a href="#">Tivi</a>
+                        @* Don't Loop *@
+                        <a href="#">Giải trí</a>
+                        <a href="#">Giới thiệu</a>
+                        <a href="#">Hỗ trợ</a>
+                    </nav>
+                </div>
+                <div class="header__right">
+                    <button><i class="bi bi-search"></i></button>
+                    <button><i class="bi bi-bag"></i></button>
+                </div>
+            </div>
+        </header>
+        <div class="container wrapper-main">
+            <main>
+                <partial name="_Toast" />
+                @RenderBody()
+            </main>
+        </div>
+            <hr>
+            <br>
+        <footer>
+            <span>Xem thêm cách để mua hàng: <a href="#">Tìm cửa hàng bán lẻ gần bạn</a>. Hoặc gọi 1800-1192</span>
+            <hr>
+            <div class="d-flex justify-content-between">
+                <span>
+                    Bản quyền &copy; 2023 Apple Inc. Bảo lưu mọi quyền.
+                </span>
+                <span>Việt Nam</span>
+            </div>
+            <div class="mt-2">
+                <a href="#">Chính sách quyền riêng tư</a> |
+                <a href="#">Điều khoản sử dụng</a> |
+                <a href="#">Bán hàng & Hoàn tiền</a> |
+                <a href="#">Pháp lý</a> |
+                <a href="#">Sơ đồ trang web</a> |
+            </div>
+        </footer>
     </div>
-    <footer>
-        FOOTER
-    </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
