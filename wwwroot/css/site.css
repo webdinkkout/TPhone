@@ -1,10 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap');
 
 :root {
+  --font-normal: 500;
+  --font-semi-bold: 600;
   --font-bold: 700;
 
-  --text-color: #333;
+  --text-tiny: 12px;
+  --text-small: 14px;
+  --text-default: 16px;
+  --text-h2: 32px;
+
   --primary-color: #d70018;
+  --text-color: #333333;
   --blue-color: #4e73df;
 
   --alpha-color-dark-1: rgba(0, 0, 0, 0.1);
@@ -21,6 +28,17 @@
 
   --text-gray-300: #dddfeb;
   --text-gray-800: #5a5c69;
+
+  --text-gray-1: rgba(128, 128, 128, 0.1);
+  --text-gray-2: rgba(128, 128, 128, 0.2);
+  --text-gray-3: rgba(128, 128, 128, 0.3);
+  --text-gray-4: rgba(128, 128, 128, 0.4);
+  --text-gray-5: rgba(128, 128, 128, 0.5);
+  --text-gray-6: rgba(128, 128, 128, 0.6);
+  --text-gray-7: rgba(128, 128, 128, 0.7);
+  --text-gray-8: rgba(128, 128, 128, 0.8);
+  --text-gray-9: rgba(128, 128, 128, 0.9);
+  --text-gray: rgba(128, 128, 128);
 }
 
 * {
@@ -98,4 +116,8 @@ button {
 
 .shadown {
   box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15) !important;
+}
+
+.shadown-secondary {
+  box-shadow: 0px 2px 16px 0px var(--alpha-color-dark-4);
 }
