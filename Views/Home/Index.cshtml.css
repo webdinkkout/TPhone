@@ -1,3 +1,22 @@
-.wrapper-home {
-  min-height: 150vh;
+.wrapper-home__title {
+  margin-bottom: 32px;
+}
+
+.sidler-product__item {
+  display: block;
+  height: 120px;
+
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--alpha-color-light-1);
+}
+
+.sidler-product__item > img {
+  height: 100%;
+  width: 100%;
+  border-radius: inherit;
+}
+
+.card-product-primary-height-custom {
+  height: 824px;
 }
