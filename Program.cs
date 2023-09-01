@@ -11,7 +11,7 @@ builder.Services.AddControllersWithViews();
 // Connect Db
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectDatabase"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectDatabase")!=null? builder.Configuration.GetConnectionString("ConnectDatabase") : "Server=.;Database=CellPhonesDb;Integrated Security=true;TrustServerCertificate=True");
 });
 
 // Add DI
