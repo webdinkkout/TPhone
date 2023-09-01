@@ -20,6 +20,30 @@
   gap: 32px;
 }
 
+.nav > a {
+  position: relative;
+}
+
+.nav > a.active::after {
+  visibility: visible;
+  opacity: 1;
+}
+
+.nav > a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120%;
+  height: 2px;
+  border-radius: 4px;
+  background-color: #000;
+
+  visibility: hidden;
+  opacity: 0;
+}
+
 .logo {
   font-size: 32px;
   font-weight: var(--font-bold);

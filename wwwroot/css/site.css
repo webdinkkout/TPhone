@@ -194,6 +194,17 @@ button {
   flex: 1;
 }
 
+.card-product-primary__title,
+.card-product-primary__sub-title,
+.card-product-primary__desc {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+}
+
 .card-product-primary__title {
   font-size: 14px;
   font-weight: var(--font-normal);

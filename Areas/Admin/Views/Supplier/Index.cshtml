@@ -1,1 +1,54 @@
-<h2>Supplier</h2>
+@model List<SupplierViewModel>;
+
+
+<div class="container">
+    <section class="text-center">
+        <h2>Sản phẩm</h2>
+        <hr>
+        <div class="mt-4">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Tên nhà cung cấp</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Số điện thoại</th>
+                        <th scope="col">Địa chỉ</th>
+                        <th scope="col" >Chức năng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if(Model.Count() <= 0) {
+                        <tr>
+                            <td colspan="3">
+                                Danh sách rỗng 	&nbsp;	&nbsp;
+                                <a asp-action="Create" class="btn btn-success">
+                                    <i class="bi bi-plus-circle"></i>
+                                    Tạo danh mục mới ?</a>
+                            </td>
+                        </tr>
+                    }else {
+                        @foreach(var item in Model) {
+                            <tr>
+                                <th scope="row">@item.Id</th>
+                                <th scope="row">@item.Name</th>
+                                <th scope="row">@item.Email</th>
+                                <th scope="row">@item.PhoneNumber</th>
+                                <th scope="row">@item.Address</th>
+                                <td>
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">
+                                        <i class="bi bi-x-circle"></i>
+                                        Xóa
+                                    </a>
+                                    <a  asp-action="Edit"  asp-route-id="@item.Id" class="btn btn-primary">
+                                        <i class="bi bi-pencil-square"></i>
+                                        Chỉnh sửa</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>

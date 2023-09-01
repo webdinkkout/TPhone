@@ -17,6 +17,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 // Add DI
 builder.Services.AddScoped<IProductCategoryService, ProductCategoryService>();
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IBrandService, BrandService>();
+builder.Services.AddScoped<ISupplierService, SupplierService>();
 
 var app = builder.Build();
 

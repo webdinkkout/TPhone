@@ -1,4 +1,6 @@
-﻿@{
+﻿@model List<Product>;
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -74,70 +76,24 @@
 
         <div class="wrapper-product">
             <div class="row">
-                <div class="col-lg-3">
-                    <div class="card-product-primary shadown-secondary">
-                        <div class="card-product-primary__header">
-                            <h4 class="card-product-primary__title">NAME</h4>
-                            <h3 class="card-product-primary__sub-title">
-                                <a href="#">
-                                    Title name product
-                                </a>
-                            </h3>
-                            <p class="card-product-primary__desc">Description</p>
-                        </div>
-                        <div class="card-product-primary__body">
-                            <img src="/images/product-1.png" alt="" class="img-fluid">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="card-product-primary shadown-secondary">
-                        <div class="card-product-primary__header">
-                            <h4 class="card-product-primary__title">NAME</h4>
-                            <h3 class="card-product-primary__sub-title">
-                                <a href="#">
-                                    Title name product
-                                </a>
-                            </h3>
-                            <p class="card-product-primary__desc">Description</p>
-                        </div>
-                        <div class="card-product-primary__body">
-                            <img src="/images/product-1.png" alt="" class="img-fluid">
+                @foreach(var item in Model) {
+                    <div class="col-lg-3">
+                        <div class="card-product-primary shadown-secondary">
+                            <div class="card-product-primary__header">
+                                <h4 class="card-product-primary__title" title="@item.ProductName" >@item.ProductName</h4>
+                                <h3 class="card-product-primary__sub-title" title="@item.ProductName">
+                                    <a href="#">
+                                        @item.ProductName
+                                    </a>
+                                </h3>
+                                <p class="card-product-primary__desc">@item.Desc</p>
+                            </div>
+                            <div class="card-product-primary__body">
+                                <img src="@item.ThumbnailFilePath" alt="" class="img-fluid">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="card-product-primary shadown-secondary">
-                        <div class="card-product-primary__header">
-                            <h4 class="card-product-primary__title">NAME</h4>
-                            <h3 class="card-product-primary__sub-title">
-                                <a href="#">
-                                    Title name product
-                                </a>
-                            </h3>
-                            <p class="card-product-primary__desc">Description</p>
-                        </div>
-                        <div class="card-product-primary__body">
-                            <img src="/images/product-1.png" alt="" class="img-fluid">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="card-product-primary shadown-secondary">
-                        <div class="card-product-primary__header">
-                            <h4 class="card-product-primary__title">NAME</h4>
-                            <h3 class="card-product-primary__sub-title">
-                                <a href="#">
-                                    Title name product
-                                </a>
-                            </h3>
-                            <p class="card-product-primary__desc">Description</p>
-                        </div>
-                        <div class="card-product-primary__body">
-                            <img src="/images/product-1.png" alt="" class="img-fluid">
-                        </div>
-                    </div>
-                </div>
+                }
             </div>
         </div>
     </section>

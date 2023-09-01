@@ -1,1 +1,71 @@
-<h2>Product</h2>
+@model ProductViewModel;
+<div class="container">
+    <section class="text-center">
+        <h2>Sản phẩm</h2>
+        <hr>
+        <div class="w-100">
+            <div class="input-group ms-auto mb-3 w-50">
+                <input id="txtSearchProduct" type="text" class="form-control" placeholder="Nhập tên sản phẩm..." aria-label="Nhập tên sản phẩm..." aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="button">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <div class="row">
+                <div class="col-lg-4">
+                    <label for="#">Nhà cung cấp</label>
+                    <select id="ddlSupplier" class="form-select" aria-label="Default select example">
+                        <option  disabled> -- Nhà cung cấp -- </option>
+                        <option selected value="">Tất cả</option>
+                        @foreach(var item in Model.Suppliers) {
+                            <option value="@item.Id">@item.Name</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-lg-4">
+                    <label for="#">Nhãn hiệu sản phẩm</label>
+                    <select id="ddlBrand" class="form-select" aria-label="Default select example">
+                        <option  disabled> -- Nhãn hiệu sản phẩm -- </option>
+                        <option selected value="">Tất cả</option>
+                        @foreach(var item in Model.Brands) {
+                            <option value="@item.Id">@item.Name</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-lg-4">
+                    <label for="#">Danh mục sản phẩm</label>
+                    <select id="ddlCategory" class="form-select" aria-label="Default select example">
+                        <option  disabled> -- Danh mục sản phẩm -- </option>
+                        <option selected value="">Tất cả</option>
+                        @foreach(var item in Model.ProductCategories) {
+                            <option value="@item.Id">@item.Name</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <table class="table table-striped mt-4">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Tên sản phẩm</th>
+                        <th scope="col">Giá</th>
+                        <th scope="col">Số lượng</th>
+                        <th scope="col">Ảnh đại diện</th>
+                        <th scope="col" >Chức năng</th>
+                    </tr>
+                </thead>
+                <tbody id="tblProducts">
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+
+@section Scripts {
+    <script src="~/js/handleAjaxProduct.js"></script>
+}

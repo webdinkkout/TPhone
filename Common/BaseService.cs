@@ -31,6 +31,8 @@ public abstract class BaseService<TEntity> : IBaseService<TEntity> where TEntity
         {
             return false;
         }
+
+
         this.dbContext.Set<TEntity>().Remove(deleteEntity);
         var rows = this.dbContext.SaveChanges();
         if (rows <= 0)

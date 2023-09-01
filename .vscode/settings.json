@@ -1,6 +1,7 @@
 {
     "dotnet.defaultSolution": "CellPhoneS.sln",
     "cSpell.words": [
+        "colspan",
         "HSTS",
         "ntext",
         "Swal",
