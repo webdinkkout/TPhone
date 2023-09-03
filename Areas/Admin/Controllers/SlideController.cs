@@ -59,7 +59,7 @@ public class SlideController : Controller
 
         var createSlide = new Slide
         {
-            Link = payload.Link,
+            Link = $"https://{payload.Link}",
             Name = payload.Name,
             Sort = payload.Sort,
             ThumbnailFileName = thumbnails[0],
@@ -75,6 +75,20 @@ public class SlideController : Controller
         }
 
         TempData["TOAST"] = "SUCCESS|Tạo slide thành công";
+        return RedirectToAction("Index");
+    }
+
+    [HttpGet]
+    public IActionResult Delete(int id)
+    {
+        var deletedSlideSuccess = this.slideService.DeleteById(id);
+        if (!deletedSlideSuccess)
+        {
+            TempData["TOAST"] = "ERROR|Xóa thất bại";
+            return RedirectToAction("Index");
+        }
+
+        TempData["TOAST"] = "SUCCESS|Xóa thành công";
         return RedirectToAction("Index");
     }
 

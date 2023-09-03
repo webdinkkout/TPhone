@@ -43,7 +43,7 @@
                                     <a target="_blank" href="@item.Link">@item.Link</a>
                                 </td>
                                 <td  style="line-height: 48px;">
-                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger" onclick="return handleDeleteAlert({id: @item.Id})">
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger" onclick="return handleDeleteAlert({deleteLink: `/Admin/Slide/Delete?id=${@item.Id}`, redirectLink: `/Admin/Slide`})">
                                         <i class="bi bi-x-circle"></i>
                                         Xóa
                                     </a>

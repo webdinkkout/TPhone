@@ -38,7 +38,7 @@
                                     <img class="img-fluid" style="width: 48px;height: 48px;object-fit: cover;object-position: center;" src="@item.ThumbnailFilePath" alt="@item.SeoName">
                                 </td>
                                 <td  style="line-height: 48px;">
-                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger" onclick="return handleDeleteAlert({id: @item.Id})">
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger" onclick="return handleDeleteAlert({deleteLink: `/Admin/ProductCategories/Delete?id=${@item.Id}`, redirectLink: `/Admin/ProductCategories`})">
                                         <i class="bi bi-x-circle"></i>
                                         Xóa
                                     </a>
