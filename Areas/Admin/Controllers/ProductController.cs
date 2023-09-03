@@ -109,4 +109,86 @@ public class ProductController : Controller
 
         return View();
     }
+
+    [HttpGet]
+    public IActionResult Edit(int id)
+    {
+        var editProduct = this.productService.FindById(id);
+
+        if (editProduct == null)
+        {
+            return NotFound();
+        }
+
+        var categories = this.productCategoryService.FindAll();
+        var brands = this.brandService.FindAll();
+        var suppliers = this.supplierService.FindAll();
+
+        var editProductView = new UpdateProduct
+        {
+            Id = editProduct.Id,
+            Desc = editProduct.Desc,
+            BrandId = editProduct.BrandId,
+            ContentHtml = editProduct.ContentHtml,
+            IsHot = editProduct.IsHot,
+            Price = editProduct.Price,
+            ProductCategoryId = editProduct.ProductCategoryId,
+            ProductName = editProduct.ProductName,
+            PromotionPrice = editProduct.PromotionPrice,
+            Quantity = editProduct.Quantity,
+            SupplierId = editProduct.SupplierId,
+            ThumbnailFileName = editProduct.ThumbnailFileName,
+            ThumbnailFilePath = editProduct.ThumbnailFilePath,
+
+            ProductCategories = categories,
+            Brands = brands,
+            Suppliers = suppliers,
+        };
+
+        return View(editProductView);
+    }
+
+    [HttpPost]
+    public IActionResult Update(UpdateProduct payload, IFormFile? fileThumbnail)
+    {
+        if (!ModelState.IsValid)
+        {
+            return View();
+        }
+        string[] thumbnails = new string[] { payload.ThumbnailFileName, payload.ThumbnailFilePath };
+        if (fileThumbnail != null)
+        {
+            new HandleFile("images/product").Delete(thumbnails[0]);
+            thumbnails = new HandleFile("images/product").Save(fileThumbnail);
+        }
+
+
+        var editProduct = new Product
+        {
+            Id = payload.Id,
+            Desc = payload.Desc,
+            BrandId = payload.BrandId,
+            ContentHtml = payload.ContentHtml,
+            IsHot = payload.IsHot,
+            Price = payload.Price,
+            ProductCategoryId = payload.ProductCategoryId,
+            ProductName = payload.ProductName,
+            PromotionPrice = payload.PromotionPrice,
+            Quantity = payload.Quantity,
+            SupplierId = payload.SupplierId,
+            ThumbnailFileName = thumbnails[0],
+            ThumbnailFilePath = thumbnails[1]
+        };
+
+
+        var updatedProductSuccess = this.productService.Update(editProduct);
+        if (!updatedProductSuccess)
+        {
+            return View();
+        }
+
+        TempData["TOAST"] = "SUCCESS|Chỉnh sửa sản phẩm thành công";
+        return RedirectToAction("Index");
+    }
+
 }

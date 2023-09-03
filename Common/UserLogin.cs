@@ -1,18 +1,25 @@
+using CellPhoneS.Models.DomainModels;
+using Newtonsoft.Json;
+
 namespace CellPhoneS.Common;
 
-public class UserLogin
+public static class UserLogin
 {
-    public int Id { get; set; }
-
-    private string FirstName { get; set; }
-    private string LastName { get; set; }
-
-    public string GetFullName()
+    public static User? GetCurrentUser(IHttpContextAccessor httpContextAccessor)
     {
-        return $"{FirstName} {LastName}";
+        var currentUserJson = httpContextAccessor.HttpContext?.Session.GetString("CURRENT_USER");
+        if (string.IsNullOrEmpty(currentUserJson))
+        {
+            return null;
+        }
+
+        var currentUser = JsonConvert.DeserializeObject<User>(currentUserJson);
+
+        if (currentUser == null)
+        {
+            return null;
+        }
+
+        return currentUser;
     }
-
-    public string Email { get; set; }
-
-    public string AvatarFilePath { get; set; }
 }

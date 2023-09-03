@@ -1,0 +1,42 @@
+@model CreateSlide;
+
+@{
+    ViewData["Title"] = "Slides | Create";
+}
+
+<div class="container">
+    <section>
+        <h2>Tạo mới slide</h2>
+        <hr>
+        <form asp-action="Create" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="txtName" class="form-label">Tên slide</label>
+                <input asp-for="Name" id="txtName" class="form-control" placeholder="Nhập tên slide">
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <label class="form-label" for="ulfThumbnail">Thumbnail</label>
+                <input name="fileThumbnail" type="file" accept="image/*" id="ulfThumbnail" class="form-control" >
+            </div>
+            <div class="form-group mt-2">
+                <label for="txtLink" class="form-label">Link liên kết</label>
+                <input asp-for="Link" id="txtLink" class="form-control" placeholder="Nhập liên kết slide">
+                <span asp-validation-for="Link" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <label for="txtOrder" class="form-label">Thứ tự sắp xếp</label>
+                <input asp-for="Sort" id="txtOrder" class="form-control" placeholder="Nhập thứ tự">
+                <span asp-validation-for="Sort" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mt-4">
+                <button class="btn btn-success">Tạo</button>
+            </div>
+        </form>
+    </section>
+</div>
+
+@section Scripts {
+    <partial  name="_ValidationScriptsPartial"/>
+   
+}

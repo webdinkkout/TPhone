@@ -1,4 +1,5 @@
 using CellPhoneS.Areas.Admin.Models.EditModels.Auth;
+using CellPhoneS.Common;
 using CellPhoneS.Constants;
 using CellPhoneS.Interfaces;
 using CellPhoneS.Models.DomainModels;
@@ -23,7 +24,7 @@ public class AdminController : Controller
 
     public IActionResult Index()
     {
-        var currentUser = this.GetCurrentUser();
+        var currentUser = UserLogin.GetCurrentUser(this.httpContextAccessor);
         if (currentUser == null)
         {
             return RedirectToAction("Login");
@@ -40,7 +41,7 @@ public class AdminController : Controller
     [HttpGet("Admin/Login")]
     public IActionResult Login()
     {
-        var currentUser = this.GetCurrentUser();
+        var currentUser = UserLogin.GetCurrentUser(this.httpContextAccessor);
         if (currentUser != null)
         {
             if (currentUser?.RoleId == "ADMIN")
@@ -91,7 +92,7 @@ public class AdminController : Controller
     public IActionResult Logout()
     {
 
-        var currentUser = this.GetCurrentUser();
+        var currentUser = UserLogin.GetCurrentUser(this.httpContextAccessor);
         if (currentUser == null)
         {
             TempData["TOAST"] = "ERROR|Đã xảy ra lỗi vui lòng liên hệ ADMIN để báo lỗi! Trân trọng";
@@ -100,23 +101,5 @@ public class AdminController : Controller
 
         this.httpContextAccessor.HttpContext?.Session.Remove("CURRENT_USER");
         return Redirect("/");
-    }
-
-    private User? GetCurrentUser()
-    {
-        var currentUserJson = this.httpContextAccessor.HttpContext?.Session.GetString("CURRENT_USER");
-        if (string.IsNullOrEmpty(currentUserJson))
-        {
-            return null;
-        }
-
-        var currentUser = JsonConvert.DeserializeObject<User>(currentUserJson);
-
-        if (currentUser == null)
-        {
-            return null;
-        }
-
-        return currentUser;
     }
 }

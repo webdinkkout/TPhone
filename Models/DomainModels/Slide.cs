@@ -10,6 +10,6 @@ public class Slide : BaseModel
 
     public string Link { get; set; }
 
-    public string Sort { get; set; }
+    public int Sort { get; set; }
 
 }

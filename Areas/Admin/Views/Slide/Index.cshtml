@@ -1,1 +1,61 @@
-<h2>Slide</h2>
+@model List<SlideViewModel>
+
+@{
+     ViewData["Title"] = "Slides";
+}
+
+<div class="container">
+    <section class="text-center">
+        <h2>Slides</h2>
+        <hr>
+        <div class="mt-4">
+            <table class="table table-striped tb-center">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Tên slide</th>
+                        <th scope="col">Hình ảnh</th>
+                        <th scope="col">Link slide</th>
+                        <th scope="col" >Chức năng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if(Model.Count() <= 0) {
+                        <tr>
+                            <td colspan="5">
+                                Danh sách rỗng 	&nbsp;	&nbsp;
+                                <a asp-action="Create" class="btn btn-success">
+                                    <i class="bi bi-plus-circle"></i>
+                                    Tạo slide mới ?</a>
+                            </td>
+                        </tr>
+                    }else {
+                        @foreach(var item in Model) {
+                            <tr>
+                                <th style="line-height: 48px;" scope="row">@item.Id</th>
+                                <td >
+                                    @item.Name
+                                </td>
+                                <td >
+                                    <img class="img-fluid" style="width: 48px;height: 48px;object-fit: cover;object-position: center;" src="@item.ThumbnailFilePath" alt="@item.Name">
+                                </td>
+                                <td >
+                                    <a target="_blank" href="@item.Link">@item.Link</a>
+                                </td>
+                                <td  style="line-height: 48px;">
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger" onclick="return handleDeleteAlert({id: @item.Id})">
+                                        <i class="bi bi-x-circle"></i>
+                                        Xóa
+                                    </a>
+                                    <a  asp-action="Edit"  asp-route-id="@item.Id" class="btn btn-primary">
+                                        <i class="bi bi-pencil-square"></i>
+                                        Chỉnh sửa</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>

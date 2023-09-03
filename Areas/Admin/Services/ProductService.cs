@@ -61,4 +61,10 @@ public class ProductService : BaseService<Product>, IProductService
 
         return query.ToList();
     }
+
+    public override bool Update(Product entity)
+    {
+        entity.SeoName = HandleSeoName.GenerateSEOName(entity.ProductName);
+        return base.Update(entity);
+    }
 }

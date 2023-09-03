@@ -63,7 +63,7 @@ const getAllProduct = (categoryId, brandId, supplierId, key = "") => {
                                 <i class="bi bi-x-circle"></i>
                                 Xóa
                             </a>
-                            <a  asp-action="Edit"  asp-route-id="${item.id}" class="btn btn-primary">
+                            <a  href="/Admin/Product/Edit?id=${item.id}" class="btn btn-primary">
                                 <i class="bi bi-pencil-square"></i>
                                 Chỉnh sửa</a>
                         </td>
