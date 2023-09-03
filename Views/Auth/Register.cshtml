@@ -1,1 +1,60 @@
-<h2>Register user</h2>
+@model CellPhoneS.Models.EditModels.Auth.Register;
+
+@{
+    ViewData["Title"] = "Admin Page";
+}
+<div class="container">
+        <!-- Outer Row -->
+    <div class="row justify-content-center">
+        <div class="col-xl-10 col-lg-12 col-md-9  w-50">
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0 ">
+                    <!-- Nested Row within Card Body -->
+                    <div class="p-5">
+                        <div class="text-center">
+                            <h1 class="h4 text-gray-900 mb-4">Đăng ký</h1>
+                        </div>
+                        <form asp-action="Register" method="POST" class="user">
+                            <div class="form-group">
+                                <input asp-for="Firstname" class="form-control form-control-user"
+                                    placeholder="Nhập họ và tên lót của bạn...">
+                                    <span class="text-danger" asp-validation-for="Firstname"></span>
+                            </div>
+                            <div class="form-group mt-2">
+                                <input asp-for="LastName" class="form-control form-control-user"
+                                   placeholder="Nhập tên của bạn...">
+                                <span class="text-danger" asp-validation-for="LastName"></span>
+                            </div>
+                            <div class="form-group mt-2">
+                                <input asp-for="Username" class="form-control form-control-user"
+                                   placeholder="Tên tài khoản của bạn...">
+                                <span class="text-danger" asp-validation-for="Username"></span>
+                            </div>
+                            <div class="form-group mt-2">
+                                <input asp-for="Password" type="password" class="form-control form-control-user"
+                                   placeholder="Mật khẩu...">
+                                <span class="text-danger" asp-validation-for="Password"></span>
+                            </div>
+                            <div class="form-group mt-2">
+                                <input asp-for="PasswordConfirm" type="password" class="form-control form-control-user"
+                                   placeholder="Nhập lại Mật khẩu...">
+                                <span class="text-danger" asp-validation-for="PasswordConfirm"></span>
+                            </div>
+                            <div class="form-group mt-2 d-flex justify-content-between">
+                                <span>Bạn đã có tài khoản ?</span>
+                                <a asp-action="Login">Đăng nhập ngay</a>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-user btn-block mt-4 w-100">
+                                Đăng ký
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

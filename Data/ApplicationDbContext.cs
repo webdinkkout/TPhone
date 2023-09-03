@@ -112,6 +112,27 @@ public class ApplicationDbContext : DbContext
                     .WithMany(e => e.OrderDetails)
                     .HasForeignKey(e => e.ProductId)
                     .IsRequired();
+
+        modelBuilder.Entity<Role>()
+                    .HasMany(e => e.Users)
+                    .WithOne(e => e.Role)
+                    .HasForeignKey(e => e.RoleId)
+                    .IsRequired();
+
+        modelBuilder.Entity<User>()
+                    .HasOne(e => e.Role)
+                    .WithMany(e => e.Users)
+                    .HasForeignKey(e => e.RoleId)
+                    .IsRequired();
+
+
+        //Seeders
+
+        modelBuilder.Entity<Role>()
+                    .HasData(
+                        new Role { Id = "ADMIN", Name = "Admin" },
+                        new Role { Id = "MEMBER", Name = "Admin" }
+                    );
     }
 
     public override int SaveChanges()
@@ -136,4 +157,14 @@ public class ApplicationDbContext : DbContext
 
     public DbSet<Product> Products { get; set; }
     public DbSet<ProductCategory> ProductCategories { get; set; }
+    public DbSet<About> Abouts { get; set; }
+    public DbSet<Brand> Brands { get; set; }
+    public DbSet<Feedback> Feedbacks { get; set; }
+    public DbSet<Menu> Menus { get; set; }
+    public DbSet<OrderDetail> OrderDetails { get; set; }
+    public DbSet<Orders> Orders { get; set; }
+    public DbSet<Role> Roles { get; set; }
+    public DbSet<User> Users { get; set; }
+    public DbSet<Slide> Slides { get; set; }
+    public DbSet<Supplier> Suppliers { get; set; }
 }

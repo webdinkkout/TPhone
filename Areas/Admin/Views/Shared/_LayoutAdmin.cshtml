@@ -29,13 +29,7 @@
                 </div>
             </div>
             <div class="header__right">
-                <div class="header__user">
-                    <img src="/images/user.png" alt="user">
-                    <a href="/Admin/User/Settings">
-                        Admin 
-                        <i class="bi bi-caret-down-fill"></i>
-                    </a>
-                </div>
+               <vc:user-info></vc:user-info>
             </div>
         </div>
     </header>
@@ -194,6 +188,9 @@
                     <ul class="sidebar__list">
                         <li class="sidebar__item">
                             <a href="/Admin/User/Settings?id=1" class="sidebar__link"><i class="bi bi-gear"></i> <span>Cài đặt</span> </a>
+                        </li>
+                        <li class="sidebar__item">
+                            <a href="/Admin/Logout" class="sidebar__link"><i class="bi bi-box-arrow-right"></i> <span>Đăng xuất</span> </a>
                         </li>
                     </ul>
                 </div>
