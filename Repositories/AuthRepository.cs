@@ -1,23 +1,22 @@
-using BCrypt.Net;
 using CellPhoneS.Constants;
 using CellPhoneS.Interfaces;
 using CellPhoneS.Models;
 
-namespace CellPhoneS.Services;
+namespace CellPhoneS.Repositories;
 
-public class AuthService : IAuthService
+public class AuthRepository : IAuthRepository
 {
-    private readonly IUserService userService;
+    private readonly IUserRepository userRepository;
 
-    public AuthService(IUserService userService)
+    public AuthRepository(IUserRepository userRepository)
     {
-        this.userService = userService;
+        this.userRepository = userRepository;
     }
 
 
     public int LoginAdmin(string username, string password)
     {
-        var userExists = this.userService.FindByUsername(username);
+        var userExists = this.userRepository.FindByUsername(username);
         if (userExists == null)
         {
             return (int)LoginState.STRONG_EMAIL;
@@ -40,7 +39,7 @@ public class AuthService : IAuthService
 
     public int Login(string username, string password)
     {
-        var userExists = this.userService.FindByUsername(username);
+        var userExists = this.userRepository.FindByUsername(username);
         if (userExists == null)
         {
             return (int)LoginState.STRONG_EMAIL;
@@ -58,7 +57,7 @@ public class AuthService : IAuthService
 
     public bool Register(User user)
     {
-        var userRes = this.userService.FindById(user.Id);
+        var userRes = this.userRepository.FindById(user.Id);
 
 
         if (userRes != null)
@@ -78,7 +77,7 @@ public class AuthService : IAuthService
             RoleId = "MEMBER"
         };
 
-        var createdUserSuccess = this.userService.Create(newUser);
+        var createdUserSuccess = this.userRepository.Create(newUser);
         if (!createdUserSuccess)
         {
             return false;

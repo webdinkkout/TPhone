@@ -8,17 +8,17 @@ namespace CellPhoneS.Areas.Admin.Controllers;
 [Area("Admin")]
 public class ProductCategoryController : Controller
 {
-    private readonly IProductCategoryService productCategoryService;
+    private readonly IProductCategoryRepository productCategoryRepository;
 
-    public ProductCategoryController(IProductCategoryService productCategoryService)
+    public ProductCategoryController(IProductCategoryRepository productCategoryRepository)
     {
-        this.productCategoryService = productCategoryService;
+        this.productCategoryRepository = productCategoryRepository;
     }
 
     [HttpGet("Admin/ProductCategories")]
     public IActionResult Index()
     {
-        var categories = this.productCategoryService.FindAll();
+        var categories = this.productCategoryRepository.FindAll();
         return View(categories);
     }
 
@@ -36,7 +36,7 @@ public class ProductCategoryController : Controller
         {
             return View();
         }
-        var isCreatedSuccess = this.productCategoryService.Create(payload, fileThumbnail);
+        var isCreatedSuccess = this.productCategoryRepository.Create(payload, fileThumbnail);
         if (!isCreatedSuccess)
         {
             return View();
@@ -49,7 +49,7 @@ public class ProductCategoryController : Controller
     [HttpGet("Admin/ProductCategories/Edit/{id?}")]
     public IActionResult Edit(int id)
     {
-        var productCategory = this.productCategoryService.FindById(id);
+        var productCategory = this.productCategoryRepository.FindById(id);
 
         if (productCategory == null)
         {
@@ -80,7 +80,7 @@ public class ProductCategoryController : Controller
         payload.ThumbnailFileName = thumbnailAttr[0];
         payload.ThumbnailFilePath = thumbnailAttr[1];
 
-        var isUpdatedSuccess = this.productCategoryService.Update(payload);
+        var isUpdatedSuccess = this.productCategoryRepository.Update(payload);
         if (!isUpdatedSuccess)
         {
             return View();
@@ -93,7 +93,7 @@ public class ProductCategoryController : Controller
     [HttpGet("Admin/ProductCategories/Delete/{id?}")]
     public IActionResult Delete(int id)
     {
-        var isDeletedSuccess = this.productCategoryService.DeleteById(id);
+        var isDeletedSuccess = this.productCategoryRepository.DeleteById(id);
 
         if (!isDeletedSuccess)
         {

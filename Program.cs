@@ -1,7 +1,6 @@
-using CellPhoneS.Areas.Admin.Services;
 using CellPhoneS.Data;
 using CellPhoneS.Interfaces;
-using CellPhoneS.Services;
+using CellPhoneS.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,14 +15,14 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 });
 
 // Add DI
-builder.Services.AddScoped<IProductCategoryService, ProductCategoryService>();
-builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<IBrandService, BrandService>();
-builder.Services.AddScoped<ISupplierService, SupplierService>();
-builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IAuthService, AuthService>();
-builder.Services.AddScoped<ISlideService, SlideService>();
-builder.Services.AddScoped<IMenuService, MenuService>();
+builder.Services.AddScoped<IProductCategoryRepository, ProductCategoryRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IBrandRepository, BrandRepository>();
+builder.Services.AddScoped<ISupplierRepository, SupplierRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+builder.Services.AddScoped<ISlideRepository, SlideRepository>();
+builder.Services.AddScoped<IMenuRepository, MenuRepository>();
 
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

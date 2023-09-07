@@ -2,7 +2,7 @@ using CellPhoneS.Models;
 
 namespace CellPhoneS.Interfaces;
 
-public interface IBrandService : IBaseService<Brand>
+public interface IBrandRepository : IBaseRepository<Brand>
 {
 
 }

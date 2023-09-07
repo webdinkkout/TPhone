@@ -8,18 +8,18 @@ namespace CellPhoneS.Areas.Admin.Controllers;
 [Area("Admin")]
 public class SlideController : Controller
 {
-    private readonly ISlideService slideService;
+    private readonly ISlideRepository slideRepository;
 
-    public SlideController(ISlideService slideService)
+    public SlideController(ISlideRepository slideRepository)
     {
-        this.slideService = slideService;
+        this.slideRepository = slideRepository;
     }
 
 
     [HttpGet]
     public IActionResult Index()
     {
-        var slides = this.slideService.FindAll();
+        var slides = this.slideRepository.FindAll();
 
         return View(slides);
     }
@@ -43,7 +43,7 @@ public class SlideController : Controller
         payload.Link = $"https://{payload.Link}";
         payload.ThumbnailFileName = thumbnails[0];
         payload.ThumbnailFilePath = thumbnails[1];
-        var createdSlideSuccess = this.slideService.Create(payload);
+        var createdSlideSuccess = this.slideRepository.Create(payload);
 
         if (!createdSlideSuccess)
         {
@@ -58,7 +58,7 @@ public class SlideController : Controller
     [HttpGet]
     public IActionResult Delete(int id)
     {
-        var deletedSlideSuccess = this.slideService.DeleteById(id);
+        var deletedSlideSuccess = this.slideRepository.DeleteById(id);
         if (!deletedSlideSuccess)
         {
             TempData["TOAST"] = "ERROR|Xóa thất bại";
@@ -72,7 +72,7 @@ public class SlideController : Controller
     [HttpGet]
     public IActionResult Edit(int id)
     {
-        var slide = this.slideService.FindById(id);
+        var slide = this.slideRepository.FindById(id);
         return View(slide);
     }
 
@@ -99,7 +99,7 @@ public class SlideController : Controller
         payload.ThumbnailFileName = thumbnails[0];
         payload.ThumbnailFilePath = thumbnails[1];
 
-        var updateSuccess = this.slideService.Update(payload);
+        var updateSuccess = this.slideRepository.Update(payload);
         if (!updateSuccess)
         {
             return View();

@@ -6,16 +6,16 @@ namespace CellPhoneS.Areas.Admin.Controllers;
 [Area("Admin")]
 public class BrandController : Controller
 {
-    private readonly IBrandService brandService;
+    private readonly IBrandRepository brandRepository;
 
-    public BrandController(IBrandService brandService)
+    public BrandController(IBrandRepository brandRepository)
     {
-        this.brandService = brandService;
+        this.brandRepository = brandRepository;
     }
 
     public IActionResult Index()
     {
-        var brands = this.brandService.FindAll();
+        var brands = this.brandRepository.FindAll();
 
         return View(brands);
     }

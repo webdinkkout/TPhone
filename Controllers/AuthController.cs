@@ -8,15 +8,15 @@ namespace CellPhoneS.Controllers;
 
 public class AuthController : Controller
 {
-    private readonly IAuthService authService;
-    private readonly IUserService userService;
+    private readonly IAuthRepository authRepository;
+    private readonly IUserRepository userRepository;
     private readonly IHttpContextAccessor httpContextAccessor;
 
-    public AuthController(IAuthService authService, IUserService userService, IHttpContextAccessor httpContextAccessor)
+    public AuthController(IAuthRepository authRepository, IUserRepository userRepository, IHttpContextAccessor httpContextAccessor)
     {
-        this.authService = authService;
+        this.authRepository = authRepository;
 
-        this.userService = userService;
+        this.userRepository = userRepository;
 
         this.httpContextAccessor = httpContextAccessor;
     }
@@ -32,7 +32,7 @@ public class AuthController : Controller
     public IActionResult Login(User payload)
     {
 
-        var stateLogin = this.authService.Login(payload.Username, payload.Password);
+        var stateLogin = this.authRepository.Login(payload.Username, payload.Password);
 
         if (stateLogin == (int)LoginState.STRONG_EMAIL)
         {
@@ -46,7 +46,7 @@ public class AuthController : Controller
             return View();
         }
 
-        var userJson = JsonConvert.SerializeObject(this.userService.FindById(stateLogin));
+        var userJson = JsonConvert.SerializeObject(this.userRepository.FindById(stateLogin));
 
         this.httpContextAccessor.HttpContext.Session.SetString("CURRENT_USER", userJson);
         return Redirect("/");
@@ -69,7 +69,7 @@ public class AuthController : Controller
         }
 
 
-        var isRegisterSuccess = this.authService.Register(payload);
+        var isRegisterSuccess = this.authRepository.Register(payload);
 
         if (!isRegisterSuccess)
         {

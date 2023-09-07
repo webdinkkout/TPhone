@@ -3,13 +3,13 @@ using CellPhoneS.Data;
 using CellPhoneS.Interfaces;
 using CellPhoneS.Models;
 
-namespace CellPhoneS.Areas.Admin.Services;
+namespace CellPhoneS.Repositories;
 
-public class UserService : BaseService<User>, IUserService
+public class UserRepository : BaseRepository<User>, IUserRepository
 {
     private readonly ApplicationDbContext _dbContext;
 
-    public UserService(ApplicationDbContext dbContext) : base(dbContext)
+    public UserRepository(ApplicationDbContext dbContext) : base(dbContext)
     {
         this._dbContext = dbContext;
     }

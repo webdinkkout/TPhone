@@ -9,25 +9,25 @@ namespace CellPhoneS.Areas.Admin.Controllers;
 [Area("Admin")]
 public class ProductController : Controller
 {
-    private readonly IProductService productService;
-    private readonly IProductCategoryService productCategoryService;
-    private readonly IBrandService brandService;
-    private readonly ISupplierService supplierService;
+    private readonly IProductRepository productRepository;
+    private readonly IProductCategoryRepository productCategoryRepository;
+    private readonly IBrandRepository brandRepository;
+    private readonly ISupplierRepository supplierRepository;
 
-    public ProductController(IProductService productService, IProductCategoryService productCategoryService, IBrandService brandService, ISupplierService supplierService)
+    public ProductController(IProductRepository productRepository, IProductCategoryRepository productCategoryRepository, IBrandRepository brandRepository, ISupplierRepository supplierRepository)
     {
-        this.productService = productService;
-        this.productCategoryService = productCategoryService;
-        this.brandService = brandService;
-        this.supplierService = supplierService;
+        this.productRepository = productRepository;
+        this.productCategoryRepository = productCategoryRepository;
+        this.brandRepository = brandRepository;
+        this.supplierRepository = supplierRepository;
     }
 
     [HttpGet]
     public IActionResult Index()
     {
-        var productCategories = this.productCategoryService.FindAll().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() });
-        var brands = this.brandService.FindAll().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() });
-        var suppliers = this.supplierService.FindAll().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() });
+        var productCategories = this.productCategoryRepository.FindAll().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() });
+        var brands = this.brandRepository.FindAll().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() });
+        var suppliers = this.supplierRepository.FindAll().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() });
 
         ViewBag.BRANDS = brands;
         ViewBag.SUPPLIERS = suppliers;
@@ -38,14 +38,14 @@ public class ProductController : Controller
     [HttpGet]
     public IActionResult GetAllProduct(int? categoryId, int? brandId, int? supplierId, string name = "")
     {
-        var productsRes = this.productService.SearchProduct(categoryId, brandId, supplierId, name);
+        var productsRes = this.productRepository.SearchProduct(categoryId, brandId, supplierId, name);
         return Json(productsRes);
     }
 
     [HttpGet]
     public IActionResult Delete(int id)
     {
-        this.productService.DeleteById(id);
+        this.productRepository.DeleteById(id);
 
         return Json(new { success = true });
     }
@@ -53,10 +53,10 @@ public class ProductController : Controller
     [HttpGet]
     public IActionResult Create()
     {
-        var productCategories = this.productCategoryService.FindAll();
+        var productCategories = this.productCategoryRepository.FindAll();
 
-        var brands = this.brandService.FindAll().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() });
-        var suppliers = this.supplierService.FindAll().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() });
+        var brands = this.brandRepository.FindAll().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() });
+        var suppliers = this.supplierRepository.FindAll().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() });
 
         ViewBag.BRANDS = brands;
         ViewBag.SUPPLIERS = brands;
@@ -79,7 +79,7 @@ public class ProductController : Controller
         payload.ThumbnailFileName = thumbnails[0];
         payload.ThumbnailFilePath = thumbnails[1];
 
-        var createdProductSuccess = this.productService.Create(payload);
+        var createdProductSuccess = this.productRepository.Create(payload);
 
         if (createdProductSuccess)
         {
@@ -93,16 +93,16 @@ public class ProductController : Controller
     [HttpGet]
     public IActionResult Edit(int id)
     {
-        var editProduct = this.productService.FindById(id);
+        var editProduct = this.productRepository.FindById(id);
 
         if (editProduct == null)
         {
             return NotFound();
         }
 
-        var productCategories = this.productCategoryService.FindAll().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() });
-        var brands = this.brandService.FindAll().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() });
-        var suppliers = this.supplierService.FindAll().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() });
+        var productCategories = this.productCategoryRepository.FindAll().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() });
+        var brands = this.brandRepository.FindAll().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() });
+        var suppliers = this.supplierRepository.FindAll().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() });
 
         ViewBag.BRANDS = brands;
         ViewBag.SUPPLIERS = suppliers;
@@ -127,7 +127,7 @@ public class ProductController : Controller
         payload.ThumbnailFileName = thumbnails[0];
         payload.ThumbnailFilePath = thumbnails[1];
 
-        var updatedProductSuccess = this.productService.Update(payload);
+        var updatedProductSuccess = this.productRepository.Update(payload);
         if (!updatedProductSuccess)
         {
             return View();

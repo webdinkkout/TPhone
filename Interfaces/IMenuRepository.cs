@@ -2,6 +2,7 @@ using CellPhoneS.Models;
 
 namespace CellPhoneS.Interfaces;
 
-public interface ISlideService : IBaseService<Slide>
+public interface IMenuRepository : IBaseRepository<Menu>
 {
+
 }

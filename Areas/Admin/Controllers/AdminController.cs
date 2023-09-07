@@ -11,13 +11,13 @@ namespace CellPhoneS.Areas.Admin.Controllers;
 [Area("Admin")]
 public class AdminController : Controller
 {
-    private readonly IAuthService authService;
-    private readonly IUserService userService;
+    private readonly IAuthRepository authRepository;
+    private readonly IUserRepository userRepository;
     private readonly IHttpContextAccessor httpContextAccessor;
-    public AdminController(IAuthService authService, IUserService userService, IHttpContextAccessor httpContextAccessor)
+    public AdminController(IAuthRepository authRepository, IUserRepository userRepository, IHttpContextAccessor httpContextAccessor)
     {
-        this.authService = authService;
-        this.userService = userService;
+        this.authRepository = authRepository;
+        this.userRepository = userRepository;
         this.httpContextAccessor = httpContextAccessor;
     }
 
@@ -62,7 +62,7 @@ public class AdminController : Controller
             return View();
         }
 
-        var stateLogin = this.authService.LoginAdmin(payload.Username, payload.Password);
+        var stateLogin = this.authRepository.LoginAdmin(payload.Username, payload.Password);
 
         if (stateLogin == (int)LoginState.STRONG_EMAIL)
         {
@@ -80,7 +80,7 @@ public class AdminController : Controller
             TempData["TOAST"] = "ERROR|Tài khoản chưa được kích hoạt vui lòng liên hệ ADMIN để biết thêm chi tiết";
             return View();
         }
-        var user = this.userService.FindById(stateLogin);
+        var user = this.userRepository.FindById(stateLogin);
         var userLoginJson = JsonConvert.SerializeObject(user);
         this.httpContextAccessor.HttpContext?.Session.SetString("CURRENT_USER", userLoginJson);
         TempData["TOAST"] = "SUCCESS|Đăng nhập thành công";

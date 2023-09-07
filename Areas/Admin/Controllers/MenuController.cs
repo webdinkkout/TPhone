@@ -9,17 +9,17 @@ namespace CellPhoneS.Areas.Admin.Controllers;
 [Area("Admin")]
 public class MenuController : Controller
 {
-    private readonly IMenuService menuService;
+    private readonly IMenuRepository menuRepository;
 
-    public MenuController(IMenuService menuService)
+    public MenuController(IMenuRepository menuRepository)
     {
-        this.menuService = menuService;
+        this.menuRepository = menuRepository;
     }
 
     [HttpGet]
     public IActionResult Index()
     {
-        var menus = this.menuService.FindAll();
+        var menus = this.menuRepository.FindAll();
         return View(menus);
     }
 
@@ -33,7 +33,7 @@ public class MenuController : Controller
     public IActionResult Create(Menu payload)
     {
 
-        this.menuService.Create(payload);
+        this.menuRepository.Create(payload);
 
         return RedirectToAction("Index");
     }
@@ -45,14 +45,14 @@ public class MenuController : Controller
         {
             return NotFound();
         }
-        var menu = this.menuService.FindById(id.Value);
+        var menu = this.menuRepository.FindById(id.Value);
         return View(menu);
     }
 
     [HttpPost]
     public IActionResult Update(Menu payload)
     {
-        this.menuService.Update(payload);
+        this.menuRepository.Update(payload);
         return RedirectToAction("Index");
     }
 
@@ -62,7 +62,7 @@ public class MenuController : Controller
     {
         if (id.HasValue)
         {
-            this.menuService.DeleteById(id.Value);
+            this.menuRepository.DeleteById(id.Value);
         }
 
         return Json(new { success = true });
