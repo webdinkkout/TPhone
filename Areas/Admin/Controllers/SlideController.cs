@@ -92,4 +92,62 @@ public class SlideController : Controller
         return RedirectToAction("Index");
     }
 
+    [HttpGet]
+    public IActionResult Edit(int id)
+    {
+        var slideRes = this.slideService.FindById(id);
+
+        var editSlide = new UpdateSlide
+        {
+            Id = slideRes.Id,
+            Link = slideRes.Link.Substring(8),
+            Name = slideRes.Name,
+            Sort = slideRes.Sort,
+            ThumbnailFileName = slideRes.ThumbnailFileName,
+            ThumbnailFilePath = slideRes.ThumbnailFilePath,
+
+        };
+
+        return View(editSlide);
+    }
+
+
+    [HttpPost]
+    public IActionResult Update(UpdateSlide payload, IFormFile? fileThumbnail)
+    {
+        TempData["TOAST"] = "ERROR|Cập nhật thất bại";
+
+        if (!ModelState.IsValid)
+        {
+            return View();
+        }
+
+
+        string[] thumbnails = new string[] { payload.ThumbnailFileName, payload.ThumbnailFilePath };
+        if (fileThumbnail != null)
+        {
+            new HandleFile("/images/slide").Delete(thumbnails[0]);
+            new HandleFile("/images/slide").Save(fileThumbnail);
+        }
+
+        var updateSlide = new Slide
+        {
+            Id = payload.Id,
+            Link = $"https://{payload.Link}",
+            Name = payload.Name,
+            Sort = payload.Sort,
+            ThumbnailFileName = thumbnails[0],
+            ThumbnailFilePath = thumbnails[1],
+        };
+
+        var updateSuccess = this.slideService.Update(updateSlide);
+        if (!updateSuccess)
+        {
+            return View();
+        }
+
+        TempData["TOAST"] = "SUCCESS|Cập nhật thành công!";
+        return RedirectToAction("Index");
+    }
+
 }

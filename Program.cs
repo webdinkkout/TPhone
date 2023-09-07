@@ -23,6 +23,7 @@ builder.Services.AddScoped<ISupplierService, SupplierService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ISlideService, SlideService>();
+builder.Services.AddScoped<IMenuService, MenuService>();
 
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -57,9 +58,16 @@ app.UseEndpoints(endpoints =>
           name: "areasRoute",
           pattern: "{area:exists}/{controller=Admin}/{action=Index}"
         );
+
     endpoints.MapControllerRoute(
         name: "default",
-        pattern: "{controller=Home}/{action=Index}/{id?}");
+        pattern: "{controller=Home}/{action=Index}/{slug?}"
+        );
+
+    // endpoints.MapControllerRoute(
+    //     name: "Categories",
+    //     pattern: "{controller=category}/{action=Index}/{slug?}"
+    // );
 });
 
 app.Run();
