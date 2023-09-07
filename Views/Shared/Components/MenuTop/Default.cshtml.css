@@ -1,0 +1,30 @@
+.nav-menu-top {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    width: 100%;
+}
+
+.nav-menu-top > a {
+    position: relative;
+}
+
+.nav-menu-top > a.active::after {
+    visibility: visible;
+    opacity: 1;
+}
+
+.nav-menu-top > a::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120%;
+    height: 2px;
+    border-radius: 4px;
+    background-color: #000;
+
+    visibility: hidden;
+    opacity: 0;
+}

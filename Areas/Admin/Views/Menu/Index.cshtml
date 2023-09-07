@@ -1,0 +1,64 @@
+@model IEnumerable<Menu>
+
+@{
+     ViewData["Title"] = "Cập nhật danh mục";
+    Layout = "_LayoutAdmin";   
+}
+
+<div class="container">
+    <section class="text-center">
+        <div class="d-flex justify-content-between">
+            <h2>Danh mục</h2>
+
+            <a asp-action="Create" class="btn btn-primary">
+                Tạo mới danh mục
+            </a>
+        </div>
+        <hr>
+        <div class="mt-4">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Tên danh mục</th>
+                        <th scope="col">Alias</th>
+                        <th scope="col">Thứ tự ưu tiên</th>
+                        <th scope="col" >Chức năng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if(Model.Count() <= 0 || !Model.Any()) {
+                        <tr>
+                            <td colspan="3">
+                                Danh sách rỗng 	&nbsp;	&nbsp;
+                                <a asp-action="Create" class="btn btn-success">
+                                    <i class="bi bi-plus-circle"></i>
+                                    Tạo danh mục mới ?</a>
+                            </td>
+                        </tr>
+                    }else {
+                        @foreach(var item in Model) {
+                            <tr>
+                                <th style="line-height: 48px;" scope="row">@item.Id</th>
+                                <td  style="line-height: 48px;">@item.Title</td>
+                                <td  style="line-height: 48px;">
+                                    <span style="background-color: #000;color: #fff;font-weight: 700;padding:2px;">/@item.Alias</span>
+                                </td>
+                                <td  style="line-height: 48px;">@item.Position</td>
+                                <td  style="line-height: 48px;">
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger" onclick="return handleDeleteAlert({deleteLink: `/Admin/Menu/Delete?id=${@item.Id}`, redirectLink: `/Admin/Menu`})">
+                                        <i class="bi bi-x-circle"></i>
+                                        Xóa
+                                    </a>
+                                    <a  asp-action="Edit"  asp-route-id="@item.Id" class="btn btn-primary">
+                                        <i class="bi bi-pencil-square"></i>
+                                        Chỉnh sửa</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,103 @@
+@model Product;
+
+<div class="container wrapper-create-product">
+    <h2 class="text-center">Chỉnh sửa sản phẩm</h2>
+    <hr>
+    <section class="py-4">
+        <form asp-action="Update" method="POST" enctype="multipart/form-data">
+        <input hidden asp-for="Id">
+        <input hidden asp-for="ThumbnailFileName">
+        <input hidden asp-for="ThumbnailFilePath">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="form-label" for="fulThumbnail" >Thumbnail</label>
+                        <input id="fulThumbnail" name="fileThumbnail" type="file" accept="image/*" class="form-control" > 
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="txtProductName" class="form-label">Tên sản phẩm</label>
+                        <input id="txtProductName" asp-for="ProductName" class="form-control" placeholder="Nhập tên sản phẩm..."> 
+                        <span class="text-danger" asp-validation-for="ProductName"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mt-3">
+                <label for="txtProductDesc" class="form-label">Mô tả ngắn gọn sản phẩm</label>
+                <input id="txtProductDesc" asp-for="Desc" class="form-control" placeholder="Nhập mô tả..."> 
+            </div>
+            <div class="form-group mt-3">
+                <label for="txtProductPrice" class="form-label">Giá sản phẩm</label>
+                <input id="txtProductPrice" asp-for="Price" class="form-control" placeholder="Nhập giá sản phẩm..."> 
+                <span class="text-danger" asp-validation-for="Price"></span>
+            </div>
+            <div class="form-group mt-3">
+                <label for="txtProductPromotionPrice" class="form-label">Giảm giá (%)</label>
+                <input id="txtProductPromotionPrice" asp-for="PromotionPrice" class="form-control" placeholder="Nhập phần trăm giảm..."> 
+                <span class="text-danger" asp-validation-for="PromotionPrice"></span>
+            </div>
+            <div class="form-group mt-3">
+                <label for="txtProductQuantity" class="form-label">Số lượng</label>
+                <input id="txtProductQuantity" asp-for="Quantity" class="form-control" placeholder="Nhập số lượng..."> 
+                <span class="text-danger" asp-validation-for="Quantity"></span>
+            </div>
+            <div class="form-check form-switch mt-3">
+                <input class="form-check-input" asp-for="IsHot" id="chkProductIsHot">
+                <label class="form-check-label" for="chkProductIsHot">HOT</label>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="#">Nhà cung cấp</label>
+                        <select class="form-select" asp-items="@ViewBag.SUPPLIERS" asp-for="SupplierId">
+                            <option  disabled> -- Nhà cung cấp -- </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="#">Nhãn hiệu sản phẩm</label>
+                        <select class="form-select" asp-items="@ViewBag.BRANDS" asp-for="BrandId">
+                            <option  disabled> -- Nhãn hiệu sản phẩm -- </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="#">Danh mục sản phẩm</label>
+                        <select class="form-select" asp-items="@ViewBag.PRODUCT_CATEGORIES" asp-for="ProductCategoryId">
+                            <option  disabled> -- Danh mục sản phẩm -- </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mt-3">
+                <label for="txtProductContent" class="form-label">Mô tả sản phẩm</label>
+                <textarea asp-for="ContentHtml" id="txtProductContent" rows="10" class="form-control"></textarea> 
+            </div>
+
+            <div class="form-group mt-3">
+                <a href="/Admin/Product"  class="btn btn-success">
+                <i class="bi bi-arrow-left"></i>
+                Trở về trang chủ
+                </a> 
+                <button  class="btn btn-primary">Lưu chỉnh sửa</button> 
+            </div>
+        </form>
+    </section>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            $("#txtProductContent").richText({
+               placeholder:"Nhập thông tin sản phẩm...",
+               preview: false
+            });
+        })
+    </script>
+    <partial  name="_ValidationScriptsPartial"/>
+}

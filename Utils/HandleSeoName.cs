@@ -8,14 +8,20 @@ public class HandleSeoName
 {
     public static string GenerateSEOName(string name)
     {
-        string seoName = RemoveDiacritics(name).ToLower();
+        string seoName = RemoveDiacritics(name).ToLower().Replace("đ", "d");
         seoName = Regex.Replace(seoName, @"\s+", "-");
 
         string prefix = Guid.NewGuid().ToString("N");
         seoName = $"{prefix}-{seoName}";
         return seoName;
     }
-
+    public static string GenerateSEONameNoPrefix(string name)
+    {
+        string seoName = RemoveDiacritics(name).ToLower().Replace("đ", "d");
+        seoName = Regex.Replace(seoName, @"\s+", "-");
+        seoName = $"{seoName}";
+        return seoName;
+    }
     private static string RemoveDiacritics(string text)
     {
         string formD = text.Normalize(NormalizationForm.FormD);

@@ -1,6 +1,6 @@
-using CellPhoneS.Areas.Admin.Services;
 using CellPhoneS.Data;
 using CellPhoneS.Interfaces;
+using CellPhoneS.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,14 +11,25 @@ builder.Services.AddControllersWithViews();
 // Connect Db
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectDatabase")!=null? builder.Configuration.GetConnectionString("ConnectDatabase") : "Server=.;Database=CellPhonesDb;Integrated Security=true;TrustServerCertificate=True");
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectDatabase") != null ? builder.Configuration.GetConnectionString("ConnectDatabase") : "Server=.;Database=CellPhonesDb;Integrated Security=true;TrustServerCertificate=True");
 });
 
 // Add DI
-builder.Services.AddScoped<IProductCategoryService, ProductCategoryService>();
-builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<IBrandService, BrandService>();
-builder.Services.AddScoped<ISupplierService, SupplierService>();
+builder.Services.AddScoped<IProductCategoryRepository, ProductCategoryRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IBrandRepository, BrandRepository>();
+builder.Services.AddScoped<ISupplierRepository, SupplierRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+builder.Services.AddScoped<ISlideRepository, SlideRepository>();
+builder.Services.AddScoped<IMenuRepository, MenuRepository>();
+
+
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddSession(o =>
+{
+    o.IdleTimeout = TimeSpan.FromSeconds(60);
+});
 
 var app = builder.Build();
 
@@ -33,6 +44,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseSession();
 
 app.UseRouting();
 
@@ -45,9 +57,16 @@ app.UseEndpoints(endpoints =>
           name: "areasRoute",
           pattern: "{area:exists}/{controller=Admin}/{action=Index}"
         );
+
     endpoints.MapControllerRoute(
         name: "default",
-        pattern: "{controller=Home}/{action=Index}/{id?}");
+        pattern: "{controller=Home}/{action=Index}/{slug?}"
+        );
+
+    // endpoints.MapControllerRoute(
+    //     name: "Categories",
+    //     pattern: "{controller=category}/{action=Index}/{slug?}"
+    // );
 });
 
 app.Run();

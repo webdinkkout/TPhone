@@ -1,0 +1,9 @@
+@model IEnumerable<Menu>
+
+    @if(Model != null && Model.Any()) {
+         <nav class="nav-menu-top">
+            @foreach(var item in Model) {
+                <a href="/@item.Alias">@item.Title</a>
+            }
+        </nav>
+    }
