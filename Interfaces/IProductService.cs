@@ -1,4 +1,4 @@
-using CellPhoneS.Models.DomainModels;
+using CellPhoneS.Models;
 
 namespace CellPhoneS.Interfaces;
 

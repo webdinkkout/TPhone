@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using CellPhoneS.Common;
 
-namespace CellPhoneS.Models.DomainModels;
+namespace CellPhoneS.Models;
 
 public class ProductCategory : BaseModel
 {

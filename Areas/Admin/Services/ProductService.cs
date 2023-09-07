@@ -1,7 +1,7 @@
 using CellPhoneS.Common;
 using CellPhoneS.Data;
 using CellPhoneS.Interfaces;
-using CellPhoneS.Models.DomainModels;
+using CellPhoneS.Models;
 using CellPhoneS.Utils;
 
 namespace CellPhoneS.Areas.Admin.Services;

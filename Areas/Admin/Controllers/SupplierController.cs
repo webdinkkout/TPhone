@@ -1,4 +1,3 @@
-using CellPhoneS.Areas.Admin.Models.ViewModels;
 using CellPhoneS.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,15 +14,8 @@ public class SupplierController : Controller
     }
     public IActionResult Index()
     {
-        var suppliersRes = this.supplierService.FindAll();
-        var suppliers = new List<SupplierViewModel>();
+        var suppliers = this.supplierService.FindAll();
 
-        foreach (var res in suppliersRes)
-        {
-            suppliers.Add(
-                new SupplierViewModel { Id = res.Id, Address = res.Address, Email = res.Email, Name = res.Name, PhoneNumber = res.PhoneNumber }
-            );
-        }
         return View(suppliers);
     }
 

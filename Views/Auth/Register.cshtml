@@ -1,4 +1,4 @@
-@model CellPhoneS.Models.EditModels.Auth.Register;
+@model User;
 
 @{
     ViewData["Title"] = "Admin Page";
@@ -16,9 +16,9 @@
                         </div>
                         <form asp-action="Register" method="POST" class="user">
                             <div class="form-group">
-                                <input asp-for="Firstname" class="form-control form-control-user"
+                                <input asp-for="FirstName" class="form-control form-control-user"
                                     placeholder="Nhập họ và tên lót của bạn...">
-                                    <span class="text-danger" asp-validation-for="Firstname"></span>
+                                    <span class="text-danger" asp-validation-for="FirstName"></span>
                             </div>
                             <div class="form-group mt-2">
                                 <input asp-for="LastName" class="form-control form-control-user"

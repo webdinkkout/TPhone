@@ -1,6 +1,6 @@
 using CellPhoneS.Common;
 
-namespace CellPhoneS.Models.DomainModels;
+namespace CellPhoneS.Models;
 
 public class Slide : BaseModel
 {

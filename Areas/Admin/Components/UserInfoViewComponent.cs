@@ -1,4 +1,4 @@
-using CellPhoneS.Models.DomainModels;
+using CellPhoneS.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 

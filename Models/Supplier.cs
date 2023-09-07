@@ -1,10 +1,13 @@
-namespace CellPhoneS.Areas.Admin.Models.ViewModels;
+using CellPhoneS.Common;
 
-public class SupplierViewModel
+namespace CellPhoneS.Models;
+
+public class Supplier : BaseModel
 {
-    public int Id { get; set; }
     public string Name { get; set; }
     public string Email { get; set; }
     public string PhoneNumber { get; set; }
     public string Address { get; set; }
+
+    public ICollection<Product> Products { get; } = new List<Product>();
 }

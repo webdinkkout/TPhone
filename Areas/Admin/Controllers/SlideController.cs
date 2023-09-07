@@ -1,7 +1,5 @@
-using CellPhoneS.Areas.Admin.Models.EditModels;
-using CellPhoneS.Areas.Admin.Models.ViewModels;
 using CellPhoneS.Interfaces;
-using CellPhoneS.Models.DomainModels;
+using CellPhoneS.Models;
 using CellPhoneS.Utils;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,22 +19,7 @@ public class SlideController : Controller
     [HttpGet]
     public IActionResult Index()
     {
-        var res = this.slideService.FindAll();
-
-        var slides = new List<SlideViewModel>();
-
-        foreach (var item in res)
-        {
-            slides.Add(
-                new SlideViewModel
-                {
-                    Name = item.Name,
-                    Id = item.Id,
-                    Link = item.Link,
-                    ThumbnailFilePath = item.ThumbnailFilePath,
-                }
-            );
-        }
+        var slides = this.slideService.FindAll();
 
         return View(slides);
     }
@@ -47,7 +30,7 @@ public class SlideController : Controller
         return View();
     }
     [HttpPost]
-    public IActionResult Create(CreateSlide payload, IFormFile? fileThumbnail)
+    public IActionResult Create(Slide payload, IFormFile? fileThumbnail)
     {
         if (!ModelState.IsValid)
         {
@@ -57,16 +40,10 @@ public class SlideController : Controller
         string[] thumbnails = new HandleFile("images/slide").Save(fileThumbnail);
 
 
-        var createSlide = new Slide
-        {
-            Link = $"https://{payload.Link}",
-            Name = payload.Name,
-            Sort = payload.Sort,
-            ThumbnailFileName = thumbnails[0],
-            ThumbnailFilePath = thumbnails[1],
-        };
-        var createdSlideSuccess = this.slideService.Create(createSlide);
-
+        payload.Link = $"https://{payload.Link}";
+        payload.ThumbnailFileName = thumbnails[0];
+        payload.ThumbnailFilePath = thumbnails[1];
+        var createdSlideSuccess = this.slideService.Create(payload);
 
         if (!createdSlideSuccess)
         {
@@ -95,25 +72,13 @@ public class SlideController : Controller
     [HttpGet]
     public IActionResult Edit(int id)
     {
-        var slideRes = this.slideService.FindById(id);
-
-        var editSlide = new UpdateSlide
-        {
-            Id = slideRes.Id,
-            Link = slideRes.Link.Substring(8),
-            Name = slideRes.Name,
-            Sort = slideRes.Sort,
-            ThumbnailFileName = slideRes.ThumbnailFileName,
-            ThumbnailFilePath = slideRes.ThumbnailFilePath,
-
-        };
-
-        return View(editSlide);
+        var slide = this.slideService.FindById(id);
+        return View(slide);
     }
 
 
     [HttpPost]
-    public IActionResult Update(UpdateSlide payload, IFormFile? fileThumbnail)
+    public IActionResult Update(Slide payload, IFormFile? fileThumbnail)
     {
         TempData["TOAST"] = "ERROR|Cập nhật thất bại";
 
@@ -130,17 +95,11 @@ public class SlideController : Controller
             new HandleFile("/images/slide").Save(fileThumbnail);
         }
 
-        var updateSlide = new Slide
-        {
-            Id = payload.Id,
-            Link = $"https://{payload.Link}",
-            Name = payload.Name,
-            Sort = payload.Sort,
-            ThumbnailFileName = thumbnails[0],
-            ThumbnailFilePath = thumbnails[1],
-        };
+        payload.Link = $"https://{payload.Link}";
+        payload.ThumbnailFileName = thumbnails[0];
+        payload.ThumbnailFilePath = thumbnails[1];
 
-        var updateSuccess = this.slideService.Update(updateSlide);
+        var updateSuccess = this.slideService.Update(payload);
         if (!updateSuccess)
         {
             return View();

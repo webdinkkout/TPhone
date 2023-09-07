@@ -1,8 +1,7 @@
-using CellPhoneS.Areas.Admin.Models.EditModels.Auth;
 using CellPhoneS.Common;
 using CellPhoneS.Constants;
 using CellPhoneS.Interfaces;
-using CellPhoneS.Models.DomainModels;
+using CellPhoneS.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -55,7 +54,7 @@ public class AdminController : Controller
 
 
     [HttpPost("Admin/Login")]
-    public IActionResult Login(Login payload)
+    public IActionResult Login(User payload)
     {
 
         if (!ModelState.IsValid)

@@ -1,7 +1,7 @@
 using BCrypt.Net;
 using CellPhoneS.Constants;
 using CellPhoneS.Interfaces;
-using CellPhoneS.Models.DomainModels;
+using CellPhoneS.Models;
 
 namespace CellPhoneS.Services;
 

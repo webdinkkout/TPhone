@@ -1,14 +1,19 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using CellPhoneS.Common;
 
-namespace CellPhoneS.Models.EditModels.Auth;
+namespace CellPhoneS.Models;
 
-public class Register
+public class User : BaseModel
 {
-    [Required(ErrorMessage = "Vui lòng nhập Họ và tên lót của bạn")]
-    public string Firstname { get; set; }
-    [Required(ErrorMessage = "Vui lòng nhập tên của bạn")]
+    public string FirstName { get; set; }
     public string LastName { get; set; }
-    [Required(ErrorMessage = "Vui lòng nhập tên đăng nhập")]
+
+    public string? AvatarFilePath { get; set; }
+
+    public string? AvatarFileName { get; set; }
+
+    [Required(ErrorMessage = "Vui lòng nhập tên tài khoản")]
     public string Username { get; set; }
 
     [Required(ErrorMessage = "Vui lòng nhập mật khẩu")]
@@ -20,5 +25,9 @@ public class Register
     [MinLength(6, ErrorMessage = "Mật khẩu phải từ 6 ký tự trở lên")]
     [DataType(DataType.Password)]
     [Compare("Password")]
+    [NotMapped]
     public string PasswordConfirm { get; set; }
+    public string RoleId { get; set; }
+
+    public Role Role { get; set; } = null!;
 }

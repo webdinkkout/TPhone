@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using CellPhoneS.Common;
 
-namespace CellPhoneS.Models.DomainModels;
+namespace CellPhoneS.Models;
 
 public class OrderDetail : BaseModel
 {

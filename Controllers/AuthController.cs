@@ -1,9 +1,8 @@
-using CellPhoneS.Models.EditModels.Auth;
 using CellPhoneS.Constants;
 using CellPhoneS.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using CellPhoneS.Models.DomainModels;
+using CellPhoneS.Models;
 
 namespace CellPhoneS.Controllers;
 
@@ -30,7 +29,7 @@ public class AuthController : Controller
 
 
     [HttpPost]
-    public IActionResult Login(Login payload)
+    public IActionResult Login(User payload)
     {
 
         var stateLogin = this.authService.Login(payload.Username, payload.Password);
@@ -61,7 +60,7 @@ public class AuthController : Controller
     }
 
     [HttpPost]
-    public IActionResult Register(Register payload)
+    public IActionResult Register(User payload)
     {
 
         if (!ModelState.IsValid)
@@ -69,15 +68,8 @@ public class AuthController : Controller
             return View();
         }
 
-        var newUser = new User
-        {
-            FirstName = payload.Firstname,
-            LastName = payload.LastName,
-            Password = payload.Password,
-            Username = payload.Username
-        };
 
-        var isRegisterSuccess = this.authService.Register(newUser);
+        var isRegisterSuccess = this.authService.Register(payload);
 
         if (!isRegisterSuccess)
         {

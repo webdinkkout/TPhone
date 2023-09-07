@@ -1,8 +1,6 @@
 using System.Text.Json.Nodes;
-using CellPhoneS.Areas.Admin.Models.EditModels.Menu;
-using CellPhoneS.Areas.Admin.Models.ViewModels;
 using CellPhoneS.Interfaces;
-using CellPhoneS.Models.DomainModels;
+using CellPhoneS.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -32,17 +30,10 @@ public class MenuController : Controller
     }
 
     [HttpPost]
-    public IActionResult Create(CreateMenu payload)
+    public IActionResult Create(Menu payload)
     {
 
-        var createMenu = new Menu
-        {
-            Title = payload.Title,
-            Description = payload.Description,
-            Position = payload.Position,
-        };
-
-        this.menuService.Create(createMenu);
+        this.menuService.Create(payload);
 
         return RedirectToAction("Index");
     }
@@ -55,33 +46,13 @@ public class MenuController : Controller
             return NotFound();
         }
         var menu = this.menuService.FindById(id.Value);
-
-        var editMenu = new UpdateMenu
-        {
-            Id = menu.Id,
-            Title = menu.Title,
-            Description = menu.Description,
-            Position = menu.Position,
-            Alias = menu.Alias,
-        };
-
-        return View(editMenu);
+        return View(menu);
     }
 
     [HttpPost]
-    public IActionResult Update(UpdateMenu payload)
+    public IActionResult Update(Menu payload)
     {
-        var updatedMenu = new Menu
-        {
-            Id = payload.Id,
-            Title = payload.Title,
-            Description = payload.Description,
-            Position = payload.Position,
-            Alias = payload.Alias
-        };
-
-        this.menuService.Update(updatedMenu);
-
+        this.menuService.Update(payload);
         return RedirectToAction("Index");
     }
 

@@ -1,4 +1,3 @@
-using CellPhoneS.Areas.Admin.Models.ViewModels;
 using CellPhoneS.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,14 +15,7 @@ public class BrandController : Controller
 
     public IActionResult Index()
     {
-        var brandsRes = this.brandService.FindAll();
-
-        var brands = new List<BrandViewModel>();
-
-        foreach (var res in brandsRes)
-        {
-            brands.Add(new BrandViewModel { Id = res.Id, Name = res.Name, });
-        }
+        var brands = this.brandService.FindAll();
 
         return View(brands);
     }

@@ -1,5 +1,5 @@
 using CellPhoneS.Common;
-using CellPhoneS.Models.DomainModels;
+using CellPhoneS.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace CellPhoneS.Data;
