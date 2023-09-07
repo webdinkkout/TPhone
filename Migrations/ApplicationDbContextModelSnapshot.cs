@@ -22,7 +22,30 @@ namespace CellPhoneS.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("CellPhoneS.Models.DomainModels.Brand", b =>
+            modelBuilder.Entity("CellPhoneS.Models.About", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Detail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Abouts");
+                });
+
+            modelBuilder.Entity("CellPhoneS.Models.Brand", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -42,10 +65,72 @@ namespace CellPhoneS.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Brand");
+                    b.ToTable("Brands");
                 });
 
-            modelBuilder.Entity("CellPhoneS.Models.DomainModels.OrderDetail", b =>
+            modelBuilder.Entity("CellPhoneS.Models.Feedback", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Detail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Feedbacks");
+                });
+
+            modelBuilder.Entity("CellPhoneS.Models.Menu", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Alias")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Position")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Menus");
+                });
+
+            modelBuilder.Entity("CellPhoneS.Models.OrderDetail", b =>
                 {
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
@@ -78,10 +163,10 @@ namespace CellPhoneS.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("OrderDetail");
+                    b.ToTable("OrderDetails");
                 });
 
-            modelBuilder.Entity("CellPhoneS.Models.DomainModels.Orders", b =>
+            modelBuilder.Entity("CellPhoneS.Models.Orders", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -117,7 +202,7 @@ namespace CellPhoneS.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("CellPhoneS.Models.DomainModels.Product", b =>
+            modelBuilder.Entity("CellPhoneS.Models.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -207,7 +292,7 @@ namespace CellPhoneS.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("CellPhoneS.Models.DomainModels.ProductCategory", b =>
+            modelBuilder.Entity("CellPhoneS.Models.ProductCategory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -248,7 +333,70 @@ namespace CellPhoneS.Migrations
                     b.ToTable("ProductCategories");
                 });
 
-            modelBuilder.Entity("CellPhoneS.Models.DomainModels.Supplier", b =>
+            modelBuilder.Entity("CellPhoneS.Models.Role", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "ADMIN",
+                            Name = "Admin"
+                        },
+                        new
+                        {
+                            Id = "MEMBER",
+                            Name = "Admin"
+                        });
+                });
+
+            modelBuilder.Entity("CellPhoneS.Models.Slide", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Link")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Sort")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ThumbnailFileName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ThumbnailFilePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Slides");
+                });
+
+            modelBuilder.Entity("CellPhoneS.Models.Supplier", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -280,18 +428,65 @@ namespace CellPhoneS.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Supplier");
+                    b.ToTable("Suppliers");
                 });
 
-            modelBuilder.Entity("CellPhoneS.Models.DomainModels.OrderDetail", b =>
+            modelBuilder.Entity("CellPhoneS.Models.User", b =>
                 {
-                    b.HasOne("CellPhoneS.Models.DomainModels.Orders", "Orders")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AvatarFileName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AvatarFilePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("CellPhoneS.Models.OrderDetail", b =>
+                {
+                    b.HasOne("CellPhoneS.Models.Orders", "Orders")
                         .WithMany("OrderDetails")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CellPhoneS.Models.DomainModels.Product", "Product")
+                    b.HasOne("CellPhoneS.Models.Product", "Product")
                         .WithMany("OrderDetails")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -302,21 +497,21 @@ namespace CellPhoneS.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("CellPhoneS.Models.DomainModels.Product", b =>
+            modelBuilder.Entity("CellPhoneS.Models.Product", b =>
                 {
-                    b.HasOne("CellPhoneS.Models.DomainModels.Brand", "Brand")
+                    b.HasOne("CellPhoneS.Models.Brand", "Brand")
                         .WithMany("Products")
                         .HasForeignKey("BrandId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CellPhoneS.Models.DomainModels.ProductCategory", "ProductCategory")
+                    b.HasOne("CellPhoneS.Models.ProductCategory", "ProductCategory")
                         .WithMany("Products")
                         .HasForeignKey("ProductCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CellPhoneS.Models.DomainModels.Supplier", "Supplier")
+                    b.HasOne("CellPhoneS.Models.Supplier", "Supplier")
                         .WithMany("Products")
                         .HasForeignKey("SupplierId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -329,27 +524,43 @@ namespace CellPhoneS.Migrations
                     b.Navigation("Supplier");
                 });
 
-            modelBuilder.Entity("CellPhoneS.Models.DomainModels.Brand", b =>
+            modelBuilder.Entity("CellPhoneS.Models.User", b =>
+                {
+                    b.HasOne("CellPhoneS.Models.Role", "Role")
+                        .WithMany("Users")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("CellPhoneS.Models.Brand", b =>
                 {
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("CellPhoneS.Models.DomainModels.Orders", b =>
+            modelBuilder.Entity("CellPhoneS.Models.Orders", b =>
                 {
                     b.Navigation("OrderDetails");
                 });
 
-            modelBuilder.Entity("CellPhoneS.Models.DomainModels.Product", b =>
+            modelBuilder.Entity("CellPhoneS.Models.Product", b =>
                 {
                     b.Navigation("OrderDetails");
                 });
 
-            modelBuilder.Entity("CellPhoneS.Models.DomainModels.ProductCategory", b =>
+            modelBuilder.Entity("CellPhoneS.Models.ProductCategory", b =>
                 {
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("CellPhoneS.Models.DomainModels.Supplier", b =>
+            modelBuilder.Entity("CellPhoneS.Models.Role", b =>
+                {
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("CellPhoneS.Models.Supplier", b =>
                 {
                     b.Navigation("Products");
                 });

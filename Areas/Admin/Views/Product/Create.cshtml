@@ -1,4 +1,4 @@
-@model CellPhoneS.Areas.Admin.Models.EditModels.Product.CreateProduct;
+@model Product;
 
 <div class="container wrapper-create-product">
     <h2 class="text-center">Tạo mới sản phẩm</h2>
@@ -48,33 +48,24 @@
                 <div class="col-lg-4">
                     <div class="form-group">
                         <label for="#">Nhà cung cấp</label>
-                        <select class="form-select" aria-label="Default select example" asp-for="SupplierId">
+                        <select class="form-select" asp-for="SupplierId" asp-items="@ViewBag.SUPPLIERS">
                             <option  disabled> -- Nhà cung cấp -- </option>
-                            @foreach(var item in Model.Suppliers) {
-                                <option value="@item.Id">@item.Name</option>
-                            }
                         </select>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="form-group">
                         <label for="#">Nhãn hiệu sản phẩm</label>
-                        <select class="form-select" aria-label="Default select example" asp-for="BrandId">
+                        <select class="form-select" asp-items="@ViewBag.BRANDS" asp-for="BrandId">
                             <option  disabled> -- Nhãn hiệu sản phẩm -- </option>
-                            @foreach(var item in Model.Brands) {
-                                <option value="@item.Id">@item.Name</option>
-                            }
                         </select>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="form-group">
                         <label for="#">Danh mục sản phẩm</label>
-                        <select class="form-select" aria-label="Default select example" asp-for="ProductCategoryId">
+                        <select class="form-select" asp-items="@ViewBag.PRODUCT_CATEGORIES" asp-for="ProductCategoryId">
                             <option  disabled> -- Danh mục sản phẩm -- </option>
-                            @foreach(var item in Model.ProductCategories) {
-                                <option value="@item.Id">@item.Name</option>
-                            }
                         </select>
                     </div>
                 </div>

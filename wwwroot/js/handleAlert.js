@@ -1,4 +1,4 @@
-function handleDeleteAlert({ id, icon, title, message, confirmTitle }) {
+function handleDeleteAlert({ icon, title, message, confirmTitle, deleteLink, redirectLink = "/Admin" }) {
     Swal.fire({
         title: title || "Xóa ?",
         text: message || 'Bạn chắc chắn muốn xóa ?. Nó sẽ bị xóa vĩnh viễn!',
@@ -10,13 +10,13 @@ function handleDeleteAlert({ id, icon, title, message, confirmTitle }) {
         cancelButtonText: 'Thoát'
     }).then((result) => {
         if (result.isConfirmed) {
-            fetch(`/Admin/ProductCategories/Delete/${id}`).then(() => {
+            fetch(deleteLink).then(() => {
                 Swal.fire(
                     'Đã xóa!',
                     'Xóa thành công!',
                     'success'
                 ).then(() => {
-                    window.location.href = "/Admin/ProductCategories";
+                    window.location.href = redirectLink;
                 })
             });
         }
