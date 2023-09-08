@@ -54,7 +54,7 @@ public class AdminController : Controller
 
 
     [HttpPost("Admin/Login")]
-    public IActionResult Login(User payload)
+    public IActionResult Login(Login payload)
     {
 
         if (!ModelState.IsValid)
