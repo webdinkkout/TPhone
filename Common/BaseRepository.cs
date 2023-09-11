@@ -3,11 +3,11 @@ using CellPhoneS.Interfaces;
 
 namespace CellPhoneS.Common;
 
-public abstract class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
+public abstract class BaseService<TEntity> : IBaseService<TEntity> where TEntity : class
 {
     private readonly ApplicationDbContext dbContext;
 
-    protected BaseRepository(ApplicationDbContext dbContext)
+    protected BaseService(ApplicationDbContext dbContext)
     {
         this.dbContext = dbContext;
     }

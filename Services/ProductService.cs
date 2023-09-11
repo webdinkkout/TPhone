@@ -4,13 +4,13 @@ using CellPhoneS.Interfaces;
 using CellPhoneS.Models;
 using CellPhoneS.Utils;
 
-namespace CellPhoneS.Repositories;
+namespace CellPhoneS.Services;
 
-public class ProductRepository : BaseRepository<Product>, IProductRepository
+public class ProductService : BaseService<Product>, IProductService
 {
     private ApplicationDbContext _dbContext;
 
-    public ProductRepository(ApplicationDbContext dbContext) : base(dbContext)
+    public ProductService(ApplicationDbContext dbContext) : base(dbContext)
     {
         this._dbContext = dbContext;
     }

@@ -4,11 +4,11 @@ using CellPhoneS.Interfaces;
 using CellPhoneS.Models;
 using CellPhoneS.Utils;
 
-namespace CellPhoneS.Repositories;
+namespace CellPhoneS.Services;
 
-public class MenuRepository : BaseRepository<Menu>, IMenuRepository
+public class MenuService : BaseService<Menu>, IMenuService
 {
-    public MenuRepository(ApplicationDbContext dbContext) : base(dbContext)
+    public MenuService(ApplicationDbContext dbContext) : base(dbContext)
     {
     }
 

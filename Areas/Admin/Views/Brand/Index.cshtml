@@ -1,48 +1,59 @@
-@model List<Brand>;
-
+@{
+     ViewData["Title"] = "Brands";
+}
 
 <div class="container">
     <section class="text-center">
-        <h2>Sản phẩm</h2>
+        <h2>Nhãn hiệu</h2>
         <hr>
         <div class="mt-4">
-            <table class="table table-striped">
+            <table class="table table-striped table-bordered w-100" id="tblBrands" >
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
+                        <th scope="col"># Id</th>
                         <th scope="col">Tên nhãn hàng</th>
+                        <th scope="col" >Thời gian tạo</th>
+                        <th scope="col" >Thời gian cập nhật</th>
                         <th scope="col" >Chức năng</th>
                     </tr>
                 </thead>
-                <tbody>
-                    @if(Model.Count() <= 0) {
-                        <tr>
-                            <td colspan="3">
-                                Danh sách rỗng 	&nbsp;	&nbsp;
-                                <a asp-action="Create" class="btn btn-success">
-                                    <i class="bi bi-plus-circle"></i>
-                                    Tạo danh mục mới ?</a>
-                            </td>
-                        </tr>
-                    }else {
-                        @foreach(var item in Model) {
-                            <tr>
-                                <th scope="row">@item.Id</th>
-                                <th scope="row">@item.Name</th>
-                                <td>
-                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">
-                                        <i class="bi bi-x-circle"></i>
-                                        Xóa
-                                    </a>
-                                    <a  asp-action="Edit"  asp-route-id="@item.Id" class="btn btn-primary">
-                                        <i class="bi bi-pencil-square"></i>
-                                        Chỉnh sửa</a>
-                                </td>
-                            </tr>
-                        }
-                    }
-                </tbody>
             </table>
         </div>
     </section>
 </div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            $("#tblBrands").DataTable({
+                info: false,
+                ajax: "/Admin/Brand/GetAllBrands",
+                columns: [
+                    {
+                        data: "id",
+                    },
+                    {
+                        data: "name",
+                    },
+                    {
+                        data: "createdAt",
+                    },
+                    {
+                        data: "updatedAt",
+                    },
+                    {
+                        data: "id",
+                        render: function(data, type) {
+                            return `<td>
+                                <a  href='/Admin/Brand/Edit?id=${data}'  class="btn btn-primary btn-sm">
+                                        <i class="bi bi-pencil-square"></i>
+                                        Chỉnh sửa</a>
+                                <a href='#' class='btn btn-danger btn-sm' onclick='return handleDeleteAlert({deleteLink: "/Admin/Brand/Delete?id=${data}", redirectLink: "/Admin/Brand"})' >Xóa</a>
+                            </td>`;
+                        }
+                    },
+                ],
+            })
+        });
+    </script>
+}

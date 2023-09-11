@@ -2,7 +2,7 @@ using CellPhoneS.Models;
 
 namespace CellPhoneS.Interfaces;
 
-public interface IAuthRepository
+public interface IAuthService
 {
     public bool Register(User user);
     public int LoginAdmin(string username, string password);

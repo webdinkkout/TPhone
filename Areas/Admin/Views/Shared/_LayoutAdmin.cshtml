@@ -12,8 +12,8 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/CellPhoneS.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
-
-    <link rel="stylesheet" href="~/lib/jquery-richtext-editor/richtext.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    
 </head>
 <body>
     <header class="">
@@ -81,7 +81,7 @@
                                     <a href="/Admin/Brand"  class="sidebar__sub-link"><i class="bi bi-easel"></i> <span>Tất cả</span> </a>
                                 </li>
                                 <li class="sidebar__sub-item">
-                                    <a href="#" class="sidebar__sub-link"><i class="bi bi-plus-circle"></i> <span>Tạo mới</span> </a>
+                                    <a href="/Admin/Brand/Create" class="sidebar__sub-link"><i class="bi bi-plus-circle"></i> <span>Tạo mới</span> </a>
                                 </li>
                             </ul>
                         </li>
@@ -203,12 +203,14 @@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/lib/jquery-richtext-editor/jquery.richtext.min.js"></script>
     <script src="~/lib/jquery-sortable/query-sortable.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.tiny.cloud/1/vowdupnl2rzb1b2k7m4spwrslnhk7hvzzbsoswo93yxcrh94/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="//cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
     <partial name="_HandleAlert" />
     <script src="~/js/handleConvertNumberToMoney.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

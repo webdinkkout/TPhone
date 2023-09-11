@@ -2,21 +2,21 @@ using CellPhoneS.Constants;
 using CellPhoneS.Interfaces;
 using CellPhoneS.Models;
 
-namespace CellPhoneS.Repositories;
+namespace CellPhoneS.Services;
 
-public class AuthRepository : IAuthRepository
+public class AuthService : IAuthService
 {
-    private readonly IUserRepository userRepository;
+    private readonly IUserService userService;
 
-    public AuthRepository(IUserRepository userRepository)
+    public AuthService(IUserService userService)
     {
-        this.userRepository = userRepository;
+        this.userService = userService;
     }
 
 
     public int LoginAdmin(string username, string password)
     {
-        var userExists = this.userRepository.FindByUsername(username);
+        var userExists = this.userService.FindByUsername(username);
         if (userExists == null)
         {
             return (int)LoginState.STRONG_EMAIL;
@@ -39,7 +39,7 @@ public class AuthRepository : IAuthRepository
 
     public int Login(string username, string password)
     {
-        var userExists = this.userRepository.FindByUsername(username);
+        var userExists = this.userService.FindByUsername(username);
         if (userExists == null)
         {
             return (int)LoginState.STRONG_EMAIL;
@@ -57,7 +57,7 @@ public class AuthRepository : IAuthRepository
 
     public bool Register(User user)
     {
-        var userRes = this.userRepository.FindById(user.Id);
+        var userRes = this.userService.FindById(user.Id);
 
 
         if (userRes != null)
@@ -77,7 +77,7 @@ public class AuthRepository : IAuthRepository
             RoleId = "MEMBER"
         };
 
-        var createdUserSuccess = this.userRepository.Create(newUser);
+        var createdUserSuccess = this.userService.Create(newUser);
         if (!createdUserSuccess)
         {
             return false;

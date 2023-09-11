@@ -39,7 +39,7 @@ const getAllProduct = (categoryId, brandId, supplierId, key = "") => {
                 htmlResult += `
                 
                 <tr>
-                    <td colspan="6">
+                    <td colspan="8">
                         Danh sách rỗng 	&nbsp;	&nbsp;
                         <a href="/Admin/Product/Create" class="btn btn-success">
                             <i class="bi bi-plus-circle"></i>
@@ -63,11 +63,11 @@ const getAllProduct = (categoryId, brandId, supplierId, key = "") => {
                         <td style="line-height: 48px" ><button class="btnIsHome ${item.isHot ? "active" : ""}">${item.isHot ? '<i style="color: blue; font-size: 20px;" class="bi bi-check"></i>' : '<i style="color: red; font-size: 20px;" class="bi bi-x"></i>'}</button></td>
                         <td style="line-height: 48px" ><button class="btnIsHome"><i style="color: red; font-size: 20px;" class="bi bi-x"></i></button></td>
                         <td style="line-height: 48px">
-                            <a class="btn btn-danger" data-id="${item.id}" onclick="deleteProduct(${item.id})">
+                            <a class="btn btn-danger btn-sm" data-id="${item.id}" onclick="deleteProduct(${item.id})">
                                 <i class="bi bi-x-circle"></i>
                                 Xóa
                             </a>
-                            <a  href="/Admin/Product/Edit?id=${item.id}" class="btn btn-primary">
+                            <a  href="/Admin/Product/Edit?id=${item.id}" class="btn btn-primary btn-sm">
                                 <i class="bi bi-pencil-square"></i>
                                 Chỉnh sửa</a>
                         </td>

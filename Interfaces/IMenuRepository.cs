@@ -2,7 +2,7 @@ using CellPhoneS.Models;
 
 namespace CellPhoneS.Interfaces;
 
-public interface IMenuRepository : IBaseRepository<Menu>
+public interface IMenuService : IBaseService<Menu>
 {
 
 }

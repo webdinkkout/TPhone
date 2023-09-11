@@ -6,15 +6,15 @@ namespace CellPhoneS.Areas.Admin.Controllers;
 [Area("Admin")]
 public class SupplierController : Controller
 {
-    private readonly ISupplierRepository supplierRepository;
+    private readonly ISupplierService supplierService;
 
-    public SupplierController(ISupplierRepository supplierRepository)
+    public SupplierController(ISupplierService supplierService)
     {
-        this.supplierRepository = supplierRepository;
+        this.supplierService = supplierService;
     }
     public IActionResult Index()
     {
-        var suppliers = this.supplierRepository.FindAll();
+        var suppliers = this.supplierService.FindAll();
 
         return View(suppliers);
     }

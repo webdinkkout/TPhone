@@ -4,12 +4,12 @@ using CellPhoneS.Interfaces;
 using CellPhoneS.Models;
 using CellPhoneS.Utils;
 
-namespace CellPhoneS.Repositories;
+namespace CellPhoneS.Services;
 
-public class ProductCategoryRepository : BaseRepository<ProductCategory>, IProductCategoryRepository
+public class ProductCategoryService : BaseService<ProductCategory>, IProductCategoryService
 {
     private readonly ApplicationDbContext _dbContext;
-    public ProductCategoryRepository(ApplicationDbContext dbContext) : base(dbContext)
+    public ProductCategoryService(ApplicationDbContext dbContext) : base(dbContext)
     {
         this._dbContext = dbContext;
     }

@@ -5,16 +5,16 @@ namespace CellPhoneS.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly IProductRepository productRepository;
+    private readonly IProductService productService;
 
-    public HomeController(IProductRepository productRepository)
+    public HomeController(IProductService productService)
     {
-        this.productRepository = productRepository;
+        this.productService = productService;
     }
 
     public IActionResult Index()
     {
-        var products = this.productRepository.FindAll().OrderByDescending(x => x.CreatedAt).ThenByDescending(x => x.UpdatedAt).Take(4).ToList();
+        var products = this.productService.FindAll().OrderByDescending(x => x.CreatedAt).ThenByDescending(x => x.UpdatedAt).Take(4).ToList();
         return View(products);
     }
 }

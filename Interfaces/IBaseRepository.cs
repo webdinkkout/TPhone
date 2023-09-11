@@ -1,6 +1,6 @@
 namespace CellPhoneS.Interfaces;
 
-public interface IBaseRepository<TEntity>
+public interface IBaseService<TEntity>
 {
     public List<TEntity> FindAll();
     public TEntity FindById(int id);
