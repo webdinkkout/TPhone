@@ -124,14 +124,24 @@ public class ApplicationDbContext : DbContext
                     .WithMany(e => e.Users)
                     .HasForeignKey(e => e.RoleId)
                     .IsRequired();
-
-
         //Seeders
-
         modelBuilder.Entity<Role>()
                     .HasData(
                         new Role { Id = "ADMIN", Name = "Admin" },
                         new Role { Id = "MEMBER", Name = "Admin" }
+                    );
+
+        modelBuilder.Entity<User>()
+                    .HasData(
+                        new User { Id = 1, FirstName = "Ad", LastName = "Min", RoleId = "ADMIN", Password = "$2a$10$1DRU3kyBUjOnbmxoUATMNe/mMWNlREnE2IE72cFEOGHw7TAI7OC4C", Username = "admin" }
+                    );
+
+        modelBuilder.Entity<Menu>()
+                    .HasData(
+                        new Menu { Id = 1, Title = "Trang chủ", Alias = "trang-chu", Description = "trang chủ", Position = 1 },
+                        new Menu { Id = 2, Title = "Danh mục sản phẩm", Alias = "danh-muc-san-pham", Description = "danh mục sản phẩm", Position = 2 },
+                        new Menu { Id = 4, Title = "Sản phẩm", Alias = "san-pham", Description = "san phẩm", Position = 3 },
+                        new Menu { Id = 3, Title = "Giới thiệu", Alias = "gioi-thieu", Description = "giới thiệu", Position = 4 }
                     );
     }
 

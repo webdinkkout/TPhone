@@ -46,10 +46,20 @@
                         }
                     },
                     {
-                        data: "createdAt"
+                        data: "createdAt",
+                        render: function(data, type) {
+                            return `<td>
+                                ${new Date(data).toLocaleDateString()}
+                            </td>`
+                        }
                     },
                     {
-                        data: "updatedAt"
+                        data: "updatedAt",
+                        render: function(data, type) {
+                            return `<td>
+                                ${new Date(data).toLocaleDateString()}
+                            </td>`
+                        }
                     },
                     {
                         data: "id",

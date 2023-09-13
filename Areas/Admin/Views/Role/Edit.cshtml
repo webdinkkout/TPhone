@@ -1,0 +1,28 @@
+@model Role;
+
+@{
+    ViewData["Title"] = "Roles | Edit";
+}
+
+<div class="container">
+    <section>
+        <h2>Chỉnh sửa chức vụ</h2>
+        <hr>
+        <form asp-action="Update" method="POST">
+            <input hidden asp-for="Id">
+            <div class="form-group">
+                <label class="form-label">Tên chức vụ</label>
+                <input asp-for="Name"  class="form-control" placeholder="Nhập tên chức vụ">
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-4">
+                <a asp-action="Index" class="btn btn-primary">Trở về</a>
+                <button class="btn btn-success">Lưu</button>
+            </div>
+        </form>
+    </section>
+</div>
+
+@section Scripts {
+    <partial  name="_ValidationScriptsPartial"/>
+}

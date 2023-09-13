@@ -1,5 +1,5 @@
 @{
-     ViewData["Title"] = "Brands";
+     ViewData["Title"] = "Roles";
 }
 
 <div class="container">
@@ -11,9 +11,7 @@
                 <thead>
                     <tr>
                         <th scope="col"># Id</th>
-                        <th scope="col">Tên nhãn hàng</th>
-                        <th scope="col" >Thời gian tạo</th>
-                        <th scope="col" >Thời gian cập nhật</th>
+                        <th scope="col">Tên Role</th>
                         <th scope="col" >Chức năng</th>
                     </tr>
                 </thead>
@@ -27,7 +25,7 @@
         $(document).ready(function() {
             $("#tblBrands").DataTable({
                 info: false,
-                ajax: "/Admin/Brand/GetAllBrands",
+                ajax: "/Admin/Role/GetAllRoles",
                 columns: [
                     {
                         data: "id",
@@ -36,29 +34,13 @@
                         data: "name",
                     },
                     {
-                        data: "createdAt",
-                        render: function(data, type) {
-                            return `<td>
-                                ${new Date(data).toLocaleDateString()}
-                            </td>`
-                        }
-                    },
-                    {
-                        data: "updatedAt",
-                        render: function(data, type) {
-                            return `<td>
-                                ${new Date(data).toLocaleDateString()}
-                            </td>`
-                        }
-                    },
-                    {
                         data: "id",
                         render: function(data, type) {
                             return `<td>
-                                <a  href='/Admin/Brand/Edit?id=${data}'  class="btn btn-primary btn-sm">
+                                <a  href='/Admin/Role/Edit?id=${data}'  class="btn btn-primary btn-sm">
                                         <i class="bi bi-pencil-square"></i>
                                         Chỉnh sửa</a>
-                                <a href='#' class='btn btn-danger btn-sm' onclick='return handleDeleteAlert({deleteLink: "/Admin/Brand/Delete?id=${data}", redirectLink: "/Admin/Brand"})' >Xóa</a>
+                                <a href='#' class='btn btn-danger btn-sm' onclick='return handleDeleteAlert({deleteLink: "/Admin/Role/Delete?id=${data}", redirectLink: "/Admin/Role"})' >Xóa</a>
                             </td>`;
                         }
                     },

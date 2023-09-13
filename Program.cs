@@ -24,6 +24,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ISlideService, SlideService>();
 builder.Services.AddScoped<IMenuService, MenuService>();
+builder.Services.AddScoped<IRoleService, RoleService>();
 
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
