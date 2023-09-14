@@ -128,7 +128,7 @@ public class ApplicationDbContext : IdentityDbContext<AppUser>
 
         modelBuilder.Entity<Menu>()
                     .HasData(
-                        new Menu { Id = 1, Title = "Trang chủ", Alias = "trang-chu", Description = "trang chủ", Position = 1 },
+                        new Menu { Id = 1, Title = "Trang chủ", Alias = "/", Description = "trang chủ", Position = 1 },
                         new Menu { Id = 2, Title = "Danh mục sản phẩm", Alias = "danh-muc-san-pham", Description = "danh mục sản phẩm", Position = 2 },
                         new Menu { Id = 4, Title = "Sản phẩm", Alias = "san-pham", Description = "san phẩm", Position = 3 },
                         new Menu { Id = 3, Title = "Giới thiệu", Alias = "gioi-thieu", Description = "giới thiệu", Position = 4 }

@@ -59,11 +59,11 @@ public class MailService : IEmailSender
         catch (Exception ex)
         {
             // Gửi mail thất bại, nội dung email sẽ lưu vào thư mục mailssave
-            System.IO.Directory.CreateDirectory("mailssave");
-            var emailsavefile = string.Format(@"mailssave/{0}.eml", Guid.NewGuid());
-            await message.WriteToAsync(emailsavefile);
+            System.IO.Directory.CreateDirectory("MailsSave");
+            var emailSaveFile = string.Format(@"MailsSave/{0}.eml", Guid.NewGuid());
+            await message.WriteToAsync(emailSaveFile);
 
-            logger.LogInformation("Lỗi gửi mail, lưu tại - " + emailsavefile);
+            logger.LogInformation("Lỗi gửi mail, lưu tại - " + emailSaveFile);
             logger.LogError(ex.Message);
         }
 

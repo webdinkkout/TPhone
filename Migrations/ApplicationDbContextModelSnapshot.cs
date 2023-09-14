@@ -201,7 +201,7 @@ namespace CellPhoneS.Migrations
                         new
                         {
                             Id = 1,
-                            Alias = "trang-chu",
+                            Alias = "/",
                             Description = "trang chủ",
                             Position = 1,
                             Title = "Trang chủ"
