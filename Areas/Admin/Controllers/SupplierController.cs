@@ -1,10 +1,12 @@
 using CellPhoneS.Interfaces;
 using CellPhoneS.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CellPhoneS.Areas.Admin.Controllers;
 
 [Area("Admin")]
+[Authorize(Roles = "Admin")]
 public class SupplierController : Controller
 {
     private readonly ISupplierService supplierService;

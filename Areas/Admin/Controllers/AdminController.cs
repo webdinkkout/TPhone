@@ -2,6 +2,7 @@ using CellPhoneS.Common;
 using CellPhoneS.Constants;
 using CellPhoneS.Interfaces;
 using CellPhoneS.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -9,6 +10,7 @@ namespace CellPhoneS.Areas.Admin.Controllers;
 
 
 [Area("Admin")]
+[Authorize(Roles = "Admin")]
 public class AdminController : Controller
 {
     private readonly IHttpContextAccessor httpContextAccessor;

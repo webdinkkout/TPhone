@@ -1,12 +1,14 @@
 using System.Text.Json.Nodes;
 using CellPhoneS.Interfaces;
 using CellPhoneS.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace CellPhoneS.Areas.Admin.Controllers;
 
 [Area("Admin")]
+[Authorize(Roles = "Admin")]
 public class MenuController : Controller
 {
     private readonly IMenuService menuService;

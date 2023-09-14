@@ -2,10 +2,12 @@ using CellPhoneS.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using CellPhoneS.Models;
 using CellPhoneS.Utils;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CellPhoneS.Areas.Admin.Controllers;
 
 [Area("Admin")]
+[Authorize(Roles = "Admin")]
 public class ProductCategoryController : Controller
 {
     private readonly IProductCategoryService productCategoryService;

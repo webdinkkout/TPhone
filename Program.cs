@@ -3,10 +3,20 @@ using CellPhoneS.Data;
 using CellPhoneS.Interfaces;
 using CellPhoneS.Models;
 using CellPhoneS.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddOptions();
+var mailSettings = builder.Configuration.GetSection("MailSettings");
+builder.Services.Configure<MailSettings>(mailSettings);
+builder.Services.AddSingleton<IEmailSender, MailService>();
+
+
+builder.Services.AddRazorPages();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews().AddJsonOptions(x =>
@@ -21,8 +31,16 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 // Config Identity
 builder.Services.AddIdentity<AppUser, IdentityRole>()
+                .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
+// builder.Services.AddDefaultIdentity<AppUser>()
+//                 .AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.ConfigureApplicationCookie(options =>
+                                        {
+                                            options.LoginPath = "/Login";
+                                            options.AccessDeniedPath = "/khong-co-quyen-truy-cap.html";
+                                        });
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
@@ -86,22 +104,21 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 
-app.UseEndpoints(endpoints =>
+
+app.MapRazorPages();
+app.MapControllerRoute(
+      name: "areasRoute",
+      pattern: "{area:exists}/{controller=Admin}/{action=Index}"
+    );
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{slug?}"
+    );
+
+using (var scope = app.Services.CreateScope())
 {
-    endpoints.MapControllerRoute(
-          name: "areasRoute",
-          pattern: "{area:exists}/{controller=Admin}/{action=Index}"
-        );
-
-    endpoints.MapControllerRoute(
-        name: "default",
-        pattern: "{controller=Home}/{action=Index}/{slug?}"
-        );
-
-    // endpoints.MapControllerRoute(
-    //     name: "Categories",
-    //     pattern: "{controller=category}/{action=Index}/{slug?}"
-    // );
-});
+    await DataSeeders.SeedRolesAndAdminAsync(scope.ServiceProvider);
+}
 
 app.Run();

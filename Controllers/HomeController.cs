@@ -1,4 +1,5 @@
 ﻿using CellPhoneS.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CellPhoneS.Controllers;
