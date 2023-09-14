@@ -1,10 +1,11 @@
 using CellPhoneS.Common;
 using CellPhoneS.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace CellPhoneS.Data;
 
-public class ApplicationDbContext : DbContext
+public class ApplicationDbContext : IdentityDbContext<AppUser>
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
@@ -13,6 +14,17 @@ public class ApplicationDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
+        foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+        {
+            var tableName = entityType.GetTableName();
+
+            if (tableName.StartsWith("AspNet"))
+            {
+                entityType.SetTableName(tableName.Substring(6));
+            }
+        }
+
         modelBuilder.Entity<OrderDetail>()
                     .HasKey(e => new { e.OrderId, e.Id, e.ProductId });
 
@@ -113,28 +125,6 @@ public class ApplicationDbContext : DbContext
                     .HasForeignKey(e => e.ProductId)
                     .IsRequired();
 
-        modelBuilder.Entity<Role>()
-                    .HasMany(e => e.Users)
-                    .WithOne(e => e.Role)
-                    .HasForeignKey(e => e.RoleId)
-                    .IsRequired();
-
-        modelBuilder.Entity<User>()
-                    .HasOne(e => e.Role)
-                    .WithMany(e => e.Users)
-                    .HasForeignKey(e => e.RoleId)
-                    .IsRequired();
-        //Seeders
-        modelBuilder.Entity<Role>()
-                    .HasData(
-                        new Role { Id = "ADMIN", Name = "Admin" },
-                        new Role { Id = "MEMBER", Name = "Admin" }
-                    );
-
-        modelBuilder.Entity<User>()
-                    .HasData(
-                        new User { Id = 1, FirstName = "Ad", LastName = "Min", RoleId = "ADMIN", Password = "$2a$10$1DRU3kyBUjOnbmxoUATMNe/mMWNlREnE2IE72cFEOGHw7TAI7OC4C", Username = "admin" }
-                    );
 
         modelBuilder.Entity<Menu>()
                     .HasData(
@@ -143,6 +133,7 @@ public class ApplicationDbContext : DbContext
                         new Menu { Id = 4, Title = "Sản phẩm", Alias = "san-pham", Description = "san phẩm", Position = 3 },
                         new Menu { Id = 3, Title = "Giới thiệu", Alias = "gioi-thieu", Description = "giới thiệu", Position = 4 }
                     );
+
     }
 
     public override int SaveChanges()
@@ -173,8 +164,6 @@ public class ApplicationDbContext : DbContext
     public DbSet<Menu> Menus { get; set; }
     public DbSet<OrderDetail> OrderDetails { get; set; }
     public DbSet<Orders> Orders { get; set; }
-    public DbSet<Role> Roles { get; set; }
-    public DbSet<User> Users { get; set; }
     public DbSet<Slide> Slides { get; set; }
     public DbSet<Supplier> Suppliers { get; set; }
 }
