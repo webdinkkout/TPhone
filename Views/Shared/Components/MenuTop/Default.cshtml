@@ -3,7 +3,11 @@
     @if(Model != null && Model.Any()) {
          <nav class="nav-menu-top">
             @foreach(var item in Model) {
-                <a href="/@item.Alias">@item.Title</a>
+                if(item.Alias.StartsWith("/") || item.Alias.StartsWith("http") ) {
+                    <a href="@item.Alias">@item.Title</a>
+                }else {
+                    <a href="/@item.Alias">@item.Title</a>
+                }
             }
         </nav>
     }

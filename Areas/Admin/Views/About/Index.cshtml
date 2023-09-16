@@ -1,1 +1,3 @@
-<h2>About</h2>
+@model About; 
+
+@Html.Raw(System.Web.HttpUtility.HtmlDecode(Model.Detail))

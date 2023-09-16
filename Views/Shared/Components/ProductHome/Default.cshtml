@@ -1,0 +1,33 @@
+@model IEnumerable<Product>;
+
+@if(Model != null && Model.Any()) {
+    <section class="wrapper-products mb-5">
+        <h2 class="title-highlight wrapper-home__title">
+            Sản phẩm mới nhất. 
+            <span>Xem ngay có gì mới.</span>
+        </h2>
+
+        <div class="wrapper-product">
+            <div class="row">
+                @foreach(var item in Model) {
+                    <div class="col-lg-3">
+                        <div class="card-product-primary shadown-secondary">
+                            <div class="card-product-primary__header">
+                                <h4 class="card-product-primary__title" title="@item.ProductName" >@item.ProductName</h4>
+                                <h3 class="card-product-primary__sub-title" title="@item.ProductName">
+                                    <a href="#">
+                                        @item.ProductName
+                                    </a>
+                                </h3>
+                                <p class="card-product-primary__desc">@item.Desc</p>
+                            </div>
+                            <div class="card-product-primary__body">
+                                <img src="@item.ThumbnailFilePath" alt="" class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}

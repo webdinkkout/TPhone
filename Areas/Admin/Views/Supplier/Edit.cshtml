@@ -1,0 +1,52 @@
+@model Supplier;
+
+@{
+    ViewData["Title"] = "Suppliers | Edit";
+}
+
+<div class="container">
+    <section>
+        <h2>Chỉnh sửa nhà cung cấp</h2>
+        <hr>
+        <form asp-action="Update" method="POST" enctype="multipart/form-data">
+            <input hidden asp-for="Id">
+            <input hidden asp-for="CreatedAt">
+            <div class="form-group">
+                <label class="form-label">Tên nhà cung cấp</label>
+                <input asp-for="Name"  class="form-control" placeholder="Nhập tên danh mục">
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Email</label>
+                <input asp-for="Email"  class="form-control" placeholder="Nhập tên danh mục">
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Số điện thoại</label>
+                <input asp-for="PhoneNumber"  class="form-control" placeholder="Nhập tên danh mục">
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Địa chỉ</label>
+                <input asp-for="Address"  class="form-control" placeholder="Nhập tên danh mục">
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mt-4">
+                <a href="/Admin/Supplier" class="btn btn-primary">
+                    Trở về
+                </a>
+                <button class="btn btn-success">
+                    <i class="bi bi-save"></i>
+                    Lưu</button>
+            </div>
+        </form>
+    </section>
+</div>
+
+@section Scripts {
+    <partial  name="_ValidationScriptsPartial"/>
+}

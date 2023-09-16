@@ -1,19 +1,23 @@
+using System.ComponentModel.DataAnnotations;
 using CellPhoneS.Common;
 
 namespace CellPhoneS.Models;
 
 public class Product : BaseModel
 {
+    [Required(ErrorMessage = "Vui lòng nhập tên sản phẩm")]
     public string ProductName { get; set; }
 
-    public string SeoName { get; set; }
+    public string? SeoName { get; set; }
 
+    [Required(ErrorMessage = "Vui lòng nhập giá tiền sản phẩm")]
     public double Price { get; set; }
 
-    public double PromotionPrice { get; set; }
+    public double PromotionPrice { get; set; } = 0;
 
     public int Rating { get; set; }
 
+    [Required(ErrorMessage = "Vui lòng nhập số lượng sản phẩm")]
     public int Quantity { get; set; }
 
     public bool IsHot { get; set; }
@@ -23,8 +27,6 @@ public class Product : BaseModel
     public int ViewCount { get; set; }
 
     public string? ContentHtml { get; set; }
-
-    public string? ContentMarkdown { get; set; }
 
     public string? ThumbnailFilePath { get; set; }
 

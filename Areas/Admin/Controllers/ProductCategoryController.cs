@@ -2,24 +2,32 @@ using CellPhoneS.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using CellPhoneS.Models;
 using CellPhoneS.Utils;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CellPhoneS.Areas.Admin.Controllers;
 
 [Area("Admin")]
+[Authorize(Roles = "Admin")]
 public class ProductCategoryController : Controller
 {
-    private readonly IProductCategoryRepository productCategoryRepository;
+    private readonly IProductCategoryService productCategoryService;
 
-    public ProductCategoryController(IProductCategoryRepository productCategoryRepository)
+    public ProductCategoryController(IProductCategoryService productCategoryService)
     {
-        this.productCategoryRepository = productCategoryRepository;
+        this.productCategoryService = productCategoryService;
     }
 
     [HttpGet("Admin/ProductCategories")]
     public IActionResult Index()
     {
-        var categories = this.productCategoryRepository.FindAll();
-        return View(categories);
+        return View();
+    }
+
+    [HttpGet("Admin/ProductCategory/GetAllProductCategories")]
+    public IActionResult GetAllProductCategories()
+    {
+        var productCategories = this.productCategoryService.FindAll();
+        return Json(new { data = productCategories });
     }
 
     [HttpGet("Admin/ProductCategories/Create")]
@@ -32,11 +40,7 @@ public class ProductCategoryController : Controller
     public IActionResult Create(ProductCategory payload, IFormFile? fileThumbnail)
     {
         TempData["TOAST"] = "ERROR|Tạo danh mục không thành công";
-        if (!ModelState.IsValid)
-        {
-            return View();
-        }
-        var isCreatedSuccess = this.productCategoryRepository.Create(payload, fileThumbnail);
+        var isCreatedSuccess = this.productCategoryService.Create(payload, fileThumbnail);
         if (!isCreatedSuccess)
         {
             return View();
@@ -49,7 +53,7 @@ public class ProductCategoryController : Controller
     [HttpGet("Admin/ProductCategories/Edit/{id?}")]
     public IActionResult Edit(int id)
     {
-        var productCategory = this.productCategoryRepository.FindById(id);
+        var productCategory = this.productCategoryService.FindById(id);
 
         if (productCategory == null)
         {
@@ -63,11 +67,6 @@ public class ProductCategoryController : Controller
     public IActionResult Update(ProductCategory payload, IFormFile? fileThumbnail)
     {
         TempData["TOAST"] = "ERROR|Chỉnh sửa không thành công";
-        if (!ModelState.IsValid)
-        {
-            return RedirectToAction("Edit", new { id = payload.Id });
-        }
-
         if (fileThumbnail != null)
         {
             new HandleFile("images/category").Delete(payload.ThumbnailFilePath.Split('/').Last());
@@ -80,7 +79,7 @@ public class ProductCategoryController : Controller
         payload.ThumbnailFileName = thumbnailAttr[0];
         payload.ThumbnailFilePath = thumbnailAttr[1];
 
-        var isUpdatedSuccess = this.productCategoryRepository.Update(payload);
+        var isUpdatedSuccess = this.productCategoryService.Update(payload);
         if (!isUpdatedSuccess)
         {
             return View();
@@ -93,7 +92,7 @@ public class ProductCategoryController : Controller
     [HttpGet("Admin/ProductCategories/Delete/{id?}")]
     public IActionResult Delete(int id)
     {
-        var isDeletedSuccess = this.productCategoryRepository.DeleteById(id);
+        var isDeletedSuccess = this.productCategoryService.DeleteById(id);
 
         if (!isDeletedSuccess)
         {

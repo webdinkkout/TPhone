@@ -1,25 +1,27 @@
 using CellPhoneS.Interfaces;
 using CellPhoneS.Models;
 using CellPhoneS.Utils;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CellPhoneS.Areas.Admin.Controllers;
 
 [Area("Admin")]
+[Authorize(Roles = "Admin")]
 public class SlideController : Controller
 {
-    private readonly ISlideRepository slideRepository;
+    private readonly ISlideService slideService;
 
-    public SlideController(ISlideRepository slideRepository)
+    public SlideController(ISlideService slideService)
     {
-        this.slideRepository = slideRepository;
+        this.slideService = slideService;
     }
 
 
     [HttpGet]
     public IActionResult Index()
     {
-        var slides = this.slideRepository.FindAll();
+        var slides = this.slideService.FindAll();
 
         return View(slides);
     }
@@ -32,18 +34,13 @@ public class SlideController : Controller
     [HttpPost]
     public IActionResult Create(Slide payload, IFormFile? fileThumbnail)
     {
-        if (!ModelState.IsValid)
-        {
-            TempData["TOAST"] = "ERROR|Tạo slide không thành công";
-            return View();
-        }
         string[] thumbnails = new HandleFile("images/slide").Save(fileThumbnail);
 
 
         payload.Link = $"https://{payload.Link}";
         payload.ThumbnailFileName = thumbnails[0];
         payload.ThumbnailFilePath = thumbnails[1];
-        var createdSlideSuccess = this.slideRepository.Create(payload);
+        var createdSlideSuccess = this.slideService.Create(payload);
 
         if (!createdSlideSuccess)
         {
@@ -58,7 +55,7 @@ public class SlideController : Controller
     [HttpGet]
     public IActionResult Delete(int id)
     {
-        var deletedSlideSuccess = this.slideRepository.DeleteById(id);
+        var deletedSlideSuccess = this.slideService.DeleteById(id);
         if (!deletedSlideSuccess)
         {
             TempData["TOAST"] = "ERROR|Xóa thất bại";
@@ -72,7 +69,7 @@ public class SlideController : Controller
     [HttpGet]
     public IActionResult Edit(int id)
     {
-        var slide = this.slideRepository.FindById(id);
+        var slide = this.slideService.FindById(id);
         return View(slide);
     }
 
@@ -81,12 +78,6 @@ public class SlideController : Controller
     public IActionResult Update(Slide payload, IFormFile? fileThumbnail)
     {
         TempData["TOAST"] = "ERROR|Cập nhật thất bại";
-
-        if (!ModelState.IsValid)
-        {
-            return View();
-        }
-
 
         string[] thumbnails = new string[] { payload.ThumbnailFileName, payload.ThumbnailFilePath };
         if (fileThumbnail != null)
@@ -99,7 +90,7 @@ public class SlideController : Controller
         payload.ThumbnailFileName = thumbnails[0];
         payload.ThumbnailFilePath = thumbnails[1];
 
-        var updateSuccess = this.slideRepository.Update(payload);
+        var updateSuccess = this.slideService.Update(payload);
         if (!updateSuccess)
         {
             return View();

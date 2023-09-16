@@ -1,0 +1,26 @@
+@model IEnumerable<Product>
+
+@if(Model != null && Model.Any()) {
+    <section class="wrapper-sliders-product mb-5">
+        <div class="sliders">
+            <div class="row">
+                @foreach(var item in Model) {
+                    <div class="col-lg-2">
+                        <a href="#" class="sidler-product__item">
+                            <img src="@item.ThumbnailFilePath" alt="" class="img-fluid">
+                        </a>
+                    </div>
+                }
+            </div>
+                <div class="slider-controls">
+                    <button class="slider-control" data-position="left">
+                        <i class="bi bi-arrow-left-circle"></i>
+                    </button>
+                    <button class="slider-control" data-position="right">
+                        <i class="bi bi-arrow-right-circle"></i>
+                    </button>
+                </div>
+            </div>
+    </section>
+}
+

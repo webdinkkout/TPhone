@@ -22,81 +22,9 @@
         </div>
     </section>
 
-    <section class="wrapper-sliders-product mb-5">
-        <div class="sliders">
-            <div class="row">
-                <div class="col-lg-2">
-                    <a href="#" class="sidler-product__item">
-                        <img src="/images/product.png" alt="" class="img-fluid">
-                    </a>
-                </div>
-                <div class="col-lg-2">
-                    <a href="#" class="sidler-product__item">
-                        <img src="/images/product.png" alt="" class="img-fluid">
-                    </a>
-                </div>
-                <div class="col-lg-2">
-                    <a href="#" class="sidler-product__item">
-                        <img src="/images/product.png" alt="" class="img-fluid">
-                    </a>
-                </div>
-                <div class="col-lg-2">
-                    <a href="#" class="sidler-product__item">
-                        <img src="/images/product.png" alt="" class="img-fluid">
-                    </a>
-                </div>
-                <div class="col-lg-2">
-                    <a href="#" class="sidler-product__item">
-                        <img src="/images/product.png" alt="" class="img-fluid">
-                    </a>
-                </div>
-                <div class="col-lg-2">
-                    <a href="#" class="sidler-product__item">
-                        <img src="/images/product.png" alt="" class="img-fluid">
-                    </a>
-                </div>
-            </div>
-
-            <div class="slider-controls">
-                <button class="slider-control" data-position="left">
-                    <i class="bi bi-arrow-left-circle"></i>
-                </button>
-                <button class="slider-control" data-position="right">
-                    <i class="bi bi-arrow-right-circle"></i>
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <section class="wrapper-products mb-5">
-        <h2 class="title-highlight wrapper-home__title">
-            Sản phẩm mới nhất. 
-            <span>Xem ngay có gì mới.</span>
-        </h2>
-
-        <div class="wrapper-product">
-            <div class="row">
-                @foreach(var item in Model) {
-                    <div class="col-lg-3">
-                        <div class="card-product-primary shadown-secondary">
-                            <div class="card-product-primary__header">
-                                <h4 class="card-product-primary__title" title="@item.ProductName" >@item.ProductName</h4>
-                                <h3 class="card-product-primary__sub-title" title="@item.ProductName">
-                                    <a href="#">
-                                        @item.ProductName
-                                    </a>
-                                </h3>
-                                <p class="card-product-primary__desc">@item.Desc</p>
-                            </div>
-                            <div class="card-product-primary__body">
-                                <img src="@item.ThumbnailFilePath" alt="" class="img-fluid">
-                            </div>
-                        </div>
-                    </div>
-                }
-            </div>
-        </div>
-    </section>
+    <vc:slide-accessory></vc:slide-accessory>
+   
+    <vc:product-home></vc:product-home>
 
     <section class="wrapper-suport mb-5">
         <h2 class="title-highlight wrapper-home__title">
@@ -117,7 +45,7 @@
                             </h3>
                         </div>
                         <div class="card-product-primary__body">
-                            <img src="/images/product-2.png" alt="" class="img-fluid">
+                            <img src="/images/user1.webp" alt="" class="img-fluid">
                         </div>
                     </div>
                 </div>
@@ -140,71 +68,6 @@
         </div>
     </section>
 
-     <section class="wrapper-phu-kien">
-        <h2 class="title-highlight wrapper-home__title">
-            Phụ kiện. 
-            <span>Tạo nét riêng cho quà mà họ thích.</span>
-        </h2>
-
-        <div class="wrapper-phu-kien mb-5">
-            <div class="sliders">
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="card-product-primary shadown-secondary ">
-                            <div class="card-product-primary__header">
-                                <h4 class="card-product-primary__title">NHẬN HỖ TRỢ QUA MAIL</h4>
-                                <h3 class="card-product-primary__sub-title">
-                                    <a href="#">
-                                        Tư vấn mua hàng từ các chuyên gia mua sắm
-                                    </a>
-                                </h3>
-                            </div>
-                            <div class="card-product-primary__body">
-                                <img src="/images/product-2.png" alt="" class="img-fluid">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="card-product-primary shadown-secondary ">
-                            <div class="card-product-primary__header">
-                                <h4 class="card-product-primary__title">NHẬN HỖ TRỢ QUA MAIL</h4>
-                                <h3 class="card-product-primary__sub-title">
-                                    <a href="#">
-                                        Tư vấn mua hàng từ các chuyên gia mua sắm
-                                    </a>
-                                </h3>
-                            </div>
-                            <div class="card-product-primary__body">
-                                <img src="/images/product-2.png" alt="" class="img-fluid">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="card-product-primary shadown-secondary ">
-                            <div class="card-product-primary__header">
-                                <h4 class="card-product-primary__title">NHẬN HỖ TRỢ QUA MAIL</h4>
-                                <h3 class="card-product-primary__sub-title">
-                                    <a href="#">
-                                        Tư vấn mua hàng từ các chuyên gia mua sắm
-                                    </a>
-                                </h3>
-                            </div>
-                            <div class="card-product-primary__body">
-                                <img src="/images/product-2.png" alt="" class="img-fluid">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="slider-controls">
-                    <button class="slider-control" data-position="left">
-                        <i class="bi bi-arrow-left-circle"></i>
-                    </button>
-                    <button class="slider-control" data-position="right">
-                        <i class="bi bi-arrow-right-circle"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
+    <vc:slide-accessory-bottom></vc:slide-accessory-bottom>
+   
 </div>
