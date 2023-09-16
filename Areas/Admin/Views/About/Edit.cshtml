@@ -1,0 +1,18 @@
+@model About
+<form action="Update" style="height: 100%;">
+    <input hidden asp-for="Id">
+    <textarea style="height: 90%;width: 100%;" asp-for="Detail"></textarea>
+    <button type="submit" class="btn btn-primary mt-3">Lưu</button>
+</form>
+
+@section Scripts {
+        <script>
+            $(document).ready(function() {
+                tinymce.init({
+                    selector: 'textarea',
+                    plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+                    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+                });
+            })
+        </script>
+}

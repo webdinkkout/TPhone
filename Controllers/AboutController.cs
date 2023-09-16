@@ -1,12 +1,9 @@
 using CellPhoneS.Interfaces;
-using CellPhoneS.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CellPhoneS.Areas.Admin.Controllers;
+namespace CellPhoneS.Controllers;
 
-[Area("Admin")]
-[Authorize(Roles = "Admin")]
 public class AboutController : Controller
 {
     private readonly IAboutService aboutService;
@@ -18,22 +15,7 @@ public class AboutController : Controller
 
     public IActionResult Index()
     {
-
-        var about = this.aboutService.FindById(1);
-
-        return View(about);
-    }
-    public IActionResult Edit()
-    {
         var about = this.aboutService.FindById(1);
         return View(about);
     }
-
-    public IActionResult Update(About about)
-    {
-        this.aboutService.Update(about);
-
-        return RedirectToAction("Edit");
-    }
-
 }

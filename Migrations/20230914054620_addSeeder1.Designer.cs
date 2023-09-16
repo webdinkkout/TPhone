@@ -4,6 +4,7 @@ using CellPhoneS.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CellPhoneS.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230914054620_addSeeder1")]
+    partial class addSeeder1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -437,29 +440,6 @@ namespace CellPhoneS.Migrations
                         .IsUnique();
 
                     b.ToTable("ProductCategories");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Điện thoại",
-                            SeoName = "dien-thoai",
-                            Status = true
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Laptop",
-                            SeoName = "laptop",
-                            Status = true
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Phụ kiện",
-                            SeoName = "phu-kien",
-                            Status = true
-                        });
                 });
 
             modelBuilder.Entity("CellPhoneS.Models.Slide", b =>

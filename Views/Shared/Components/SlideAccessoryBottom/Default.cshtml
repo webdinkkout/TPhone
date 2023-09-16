@@ -1,0 +1,44 @@
+@model IEnumerable<Product>
+
+@if(Model != null && Model.Any()) {
+     <section class="wrapper-phu-kien">
+        <h2 class="title-highlight wrapper-home__title">
+            Phụ kiện. 
+            <span>Tạo nét riêng cho quà mà họ thích.</span>
+        </h2>
+
+        <div class="wrapper-phu-kien mb-5">
+            <div class="sliders">
+                <div class="row">
+                    @foreach(var item in Model) {
+                        <div class="col-lg-4">
+                            <div class="card-product-primary shadown-secondary ">
+                                <div class="card-product-primary__header">
+                                    <h4 class="card-product-primary__title">@item.ProductName</h4>
+                                    <h3 class="card-product-primary__sub-title">
+                                        <a href="#">
+                                            @item.ProductName
+                                        </a>
+                                    </h3>
+                                </div>
+                                <div class="card-product-primary__body">
+                                    <img src="@item.ThumbnailFilePath" alt="" class="img-fluid">
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <div class="slider-controls">
+                    <button class="slider-control" data-position="left">
+                        <i class="bi bi-arrow-left-circle"></i>
+                    </button>
+                    <button class="slider-control" data-position="right">
+                        <i class="bi bi-arrow-right-circle"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+

@@ -75,6 +75,7 @@ builder.Services.AddScoped<IBrandService, BrandService>();
 builder.Services.AddScoped<ISupplierService, SupplierService>();
 builder.Services.AddScoped<ISlideService, SlideService>();
 builder.Services.AddScoped<IMenuService, MenuService>();
+builder.Services.AddScoped<IAboutService, AboutService>();
 
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -115,6 +116,11 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{slug?}"
     );
+app.MapControllerRoute(
+    name: "default",
+    pattern: "gioi-thieu/{slug?}",
+    defaults: new { controller = "About", action = "Index" }
+);
 
 using (var scope = app.Services.CreateScope())
 {

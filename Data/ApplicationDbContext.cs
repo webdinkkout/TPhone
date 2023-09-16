@@ -134,6 +134,18 @@ public class ApplicationDbContext : IdentityDbContext<AppUser>
                         new Menu { Id = 3, Title = "Giới thiệu", Alias = "gioi-thieu", Description = "giới thiệu", Position = 4 }
                     );
 
+        modelBuilder.Entity<About>()
+                    .HasData(
+                        new About { Id = 1, Detail = "<h1>Hello About</h1>" }
+                    );
+
+        modelBuilder.Entity<ProductCategory>()
+                   .HasData(
+                       new ProductCategory { Id = 1, Name = "Điện thoại", SeoName = "dien-thoai", Status = true },
+                       new ProductCategory { Id = 2, Name = "Laptop", SeoName = "laptop", Status = true },
+                       new ProductCategory { Id = 3, Name = "Phụ kiện", SeoName = "phu-kien", Status = true }
+                   );
+
     }
 
     public override int SaveChanges()
