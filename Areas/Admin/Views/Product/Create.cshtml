@@ -1,5 +1,10 @@
 @model Product;
 
+@{
+     ViewData["Title"] = "Create | Product";
+}
+
+
 <div class="container wrapper-create-product">
     <h2 class="text-center">Tạo mới sản phẩm</h2>
     <hr>
@@ -26,17 +31,17 @@
             </div>
             <div class="form-group mt-3">
                 <label for="txtProductPrice" class="form-label">Giá sản phẩm</label>
-                <input id="txtProductPrice" asp-for="Price" class="form-control" placeholder="Nhập giá sản phẩm..."> 
+                <input id="txtProductPrice" asp-for="Price" class="form-control" placeholder="Nhập giá sản phẩm..." value="0"> 
                 <span class="text-danger" asp-validation-for="Price"></span>
             </div>
             <div class="form-group mt-3">
-                <label for="txtProductPromotionPrice" class="form-label">Giảm giá (%)</label>
-                <input id="txtProductPromotionPrice" asp-for="PromotionPrice" class="form-control" placeholder="Nhập phần trăm giảm..."> 
+                <label for="txtProductPromotionPrice" class="form-label">Giá khuyến mãi</label>
+                <input id="txtProductPromotionPrice" asp-for="PromotionPrice" class="form-control" placeholder="Giá khuyến mãi..." value="0" > 
                 <span class="text-danger" asp-validation-for="PromotionPrice"></span>
             </div>
             <div class="form-group mt-3">
                 <label for="txtProductQuantity" class="form-label">Số lượng</label>
-                <input id="txtProductQuantity" asp-for="Quantity" class="form-control" placeholder="Nhập số lượng..."> 
+                <input id="txtProductQuantity" asp-for="Quantity" class="form-control" placeholder="Nhập số lượng..." value="0"> 
                 <span class="text-danger" asp-validation-for="Quantity"></span>
             </div>
             <div class="form-check form-switch mt-3">
@@ -84,13 +89,14 @@
 </div>
 
 @section Scripts {
-    <script>
-        $(document).ready(function() {
-            $("#txtProductContent").richText({
-               placeholder:"Nhập thông tin sản phẩm...",
-               preview: false
-            });
-        })
-    </script>
+        <script>
+            $(document).ready(function() {
+                tinymce.init({
+                    selector: 'textarea',
+                    plugins: 'mentions anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect a11ychecker typography inlinecss',
+                    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+                });
+            })
+        </script>
     <partial  name="_ValidationScriptsPartial"/>
 }

@@ -2,7 +2,7 @@ using CellPhoneS.Models;
 
 namespace CellPhoneS.Interfaces;
 
-public interface IProductCategoryRepository : IBaseRepository<ProductCategory>
+public interface IProductCategoryService : IBaseService<ProductCategory>
 {
     public bool Create(ProductCategory entity, IFormFile file);
 

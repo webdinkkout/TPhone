@@ -177,7 +177,9 @@ button {
     padding: 12px;
     border-radius: 20px;
     background-color: #fff;
-    min-height: 440px;
+    height: 440px;
+
+    overflow: hidden;
 
     transition: 0.2s;
 }
@@ -209,6 +211,12 @@ button {
     font-size: 14px;
     font-weight: var(--font-normal);
     color: var(--text-gray);
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
 }
 
 .card-product-primary__sub-title {

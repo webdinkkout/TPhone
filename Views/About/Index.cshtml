@@ -1,0 +1,8 @@
+@model About;
+
+<div class="container">
+  <section class="about-page">
+        @Html.Raw(System.Web.HttpUtility.HtmlDecode(Model.Detail))
+  </section>
+</div>
+

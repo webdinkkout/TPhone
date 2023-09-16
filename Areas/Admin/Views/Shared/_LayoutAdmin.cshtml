@@ -12,8 +12,8 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/CellPhoneS.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
-
-    <link rel="stylesheet" href="~/lib/jquery-richtext-editor/richtext.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    
 </head>
 <body>
     <header class="">
@@ -29,7 +29,7 @@
                 </div>
             </div>
             <div class="header__right">
-               <vc:user-info></vc:user-info>
+                <partial name="_LoginPartial" />
             </div>
         </div>
     </header>
@@ -81,7 +81,7 @@
                                     <a href="/Admin/Brand"  class="sidebar__sub-link"><i class="bi bi-easel"></i> <span>Tất cả</span> </a>
                                 </li>
                                 <li class="sidebar__sub-item">
-                                    <a href="#" class="sidebar__sub-link"><i class="bi bi-plus-circle"></i> <span>Tạo mới</span> </a>
+                                    <a href="/Admin/Brand/Create" class="sidebar__sub-link"><i class="bi bi-plus-circle"></i> <span>Tạo mới</span> </a>
                                 </li>
                             </ul>
                         </li>
@@ -89,10 +89,10 @@
                             <p  class="sidebar__link"><i class="bi bi-house-door"></i> <span>Nhà cung cấp</span> <i class="bi bi-caret-down"></i> </p>
                             <ul class="sidebar__sub-list">
                                 <li class="sidebar__sub-item">
-                                    <a href="Supplier"  class="sidebar__sub-link"><i class="bi bi-easel"></i> <span>Tất cả</span> </a>
+                                    <a href="/Admin/Supplier"  class="sidebar__sub-link"><i class="bi bi-easel"></i> <span>Tất cả</span> </a>
                                 </li>
                                 <li class="sidebar__sub-item">
-                                    <a href="#" class="sidebar__sub-link"><i class="bi bi-plus-circle"></i> <span>Tạo mới</span> </a>
+                                    <a href="/Admin/Supplier/Create" class="sidebar__sub-link"><i class="bi bi-plus-circle"></i> <span>Tạo mới</span> </a>
                                 </li>
                             </ul>
                         </li>
@@ -115,38 +115,21 @@
                                 </li>
                             </ul>
                         </li>
+                    </ul>
+                </div>
+
+                <div class="group-menu">
+                    <span class="sidebar__title">
+                      <i class="bi bi-segmented-nav"></i>
+                        Giới thiệu trang
+                    </span>
+
+                    <ul class="sidebar__list">
                         <li class="sidebar__item">
-                            <p  class="sidebar__link"><i class="bi bi-person-up"></i> <span>Roles</span> <i class="bi bi-caret-down"></i> </p>
-                            <ul class="sidebar__sub-list">
-                                <li class="sidebar__sub-item">
-                                    <a href="/Admin/Slide"  class="sidebar__sub-link"><i class="bi bi-easel"></i> <span>Tất cả</span> </a>
-                                </li>
-                                <li class="sidebar__sub-item">
-                                    <a href="/Admin/Slide/Create" class="sidebar__sub-link"><i class="bi bi-plus-circle"></i> <span>Tạo mới</span> </a>
-                                </li>
-                            </ul>
+                            <a href="/Admin/About" class="sidebar__link"><i class="bi bi-eye"></i> <span>Xem trước</span> </a>
                         </li>
                         <li class="sidebar__item">
-                            <p  class="sidebar__link"><i class="bi bi-person-plus"></i> <span>Users</span> <i class="bi bi-caret-down"></i> </p>
-                            <ul class="sidebar__sub-list">
-                                <li class="sidebar__sub-item">
-                                    <a href="/Admin/Slide"  class="sidebar__sub-link"><i class="bi bi-easel"></i> <span>Tất cả</span> </a>
-                                </li>
-                                <li class="sidebar__sub-item">
-                                    <a href="/Admin/Slide/Create" class="sidebar__sub-link"><i class="bi bi-plus-circle"></i> <span>Tạo mới</span> </a>
-                                </li>
-                            </ul>
-                        </li>
-                         <li class="sidebar__item">
-                            <p  class="sidebar__link"><i class="bi bi-people"></i> <span>Giới thiệu</span> <i class="bi bi-caret-down"></i> </p>
-                            <ul class="sidebar__sub-list">
-                                <li class="sidebar__sub-item">
-                                    <a href="About"  class="sidebar__sub-link"><i class="bi bi-easel"></i> <span>Tất cả</span> </a>
-                                </li>
-                                <li class="sidebar__sub-item">
-                                    <a href="#" class="sidebar__sub-link"><i class="bi bi-plus-circle"></i> <span>Tạo mới</span> </a>
-                                </li>
-                            </ul>
+                            <a href="/Admin/About/Edit" class="sidebar__link"><i class="bi bi-pencil-square"></i> <span>Chỉnh sửa</span> </a>
                         </li>
                     </ul>
                 </div>
@@ -187,9 +170,6 @@
                         <li class="sidebar__item">
                             <a href="/Admin/User/Settings?id=1" class="sidebar__link"><i class="bi bi-gear"></i> <span>Cài đặt</span> </a>
                         </li>
-                        <li class="sidebar__item">
-                            <a href="/Admin/Logout" class="sidebar__link"><i class="bi bi-box-arrow-right"></i> <span>Đăng xuất</span> </a>
-                        </li>
                     </ul>
                 </div>
 
@@ -203,12 +183,14 @@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/lib/jquery-richtext-editor/jquery.richtext.min.js"></script>
     <script src="~/lib/jquery-sortable/query-sortable.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.tiny.cloud/1/vowdupnl2rzb1b2k7m4spwrslnhk7hvzzbsoswo93yxcrh94/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="//cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
     <partial name="_HandleAlert" />
     <script src="~/js/handleConvertNumberToMoney.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

@@ -5,12 +5,12 @@ namespace CellPhoneS.Components;
 
 public class MenuTopViewComponent : ViewComponent
 {
-    private readonly IMenuRepository menuRepository;
+    private readonly IMenuService menuService;
 
-    public MenuTopViewComponent(IMenuRepository menuRepository)
+    public MenuTopViewComponent(IMenuService menuService)
     {
-        this.menuRepository = menuRepository;
+        this.menuService = menuService;
     }
 
-    public async Task<IViewComponentResult> InvokeAsync() => View(this.menuRepository.FindAll().OrderBy(x => x.Position).ToList());
+    public async Task<IViewComponentResult> InvokeAsync() => View(this.menuService.FindAll().OrderBy(x => x.Position).ToList());
 }

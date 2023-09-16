@@ -1,25 +1,27 @@
 using System.Text.Json.Nodes;
 using CellPhoneS.Interfaces;
 using CellPhoneS.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace CellPhoneS.Areas.Admin.Controllers;
 
 [Area("Admin")]
+[Authorize(Roles = "Admin")]
 public class MenuController : Controller
 {
-    private readonly IMenuRepository menuRepository;
+    private readonly IMenuService menuService;
 
-    public MenuController(IMenuRepository menuRepository)
+    public MenuController(IMenuService menuService)
     {
-        this.menuRepository = menuRepository;
+        this.menuService = menuService;
     }
 
     [HttpGet]
     public IActionResult Index()
     {
-        var menus = this.menuRepository.FindAll();
+        var menus = this.menuService.FindAll();
         return View(menus);
     }
 
@@ -33,7 +35,7 @@ public class MenuController : Controller
     public IActionResult Create(Menu payload)
     {
 
-        this.menuRepository.Create(payload);
+        this.menuService.Create(payload);
 
         return RedirectToAction("Index");
     }
@@ -45,14 +47,14 @@ public class MenuController : Controller
         {
             return NotFound();
         }
-        var menu = this.menuRepository.FindById(id.Value);
+        var menu = this.menuService.FindById(id.Value);
         return View(menu);
     }
 
     [HttpPost]
     public IActionResult Update(Menu payload)
     {
-        this.menuRepository.Update(payload);
+        this.menuService.Update(payload);
         return RedirectToAction("Index");
     }
 
@@ -62,7 +64,7 @@ public class MenuController : Controller
     {
         if (id.HasValue)
         {
-            this.menuRepository.DeleteById(id.Value);
+            this.menuService.DeleteById(id.Value);
         }
 
         return Json(new { success = true });
