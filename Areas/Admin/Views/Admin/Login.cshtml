@@ -1,3 +1,5 @@
+@* @model Login;
+
 @{
     ViewData["Title"] = "Admin Page";
     Layout = "_LayoutLoginAdmin";
@@ -11,17 +13,18 @@
                     <!-- Nested Row within Card Body -->
                     <div class="p-5">
                         <div class="text-center">
-                            <h1 class="h4 text-gray-900 mb-4">Admin Login</h1>
+                            <h1 class="h4 text-gray-900 mb-4">Welcome back ADMIN</h1>
                         </div>
-                        <form class="user">
+                        <form asp-action="Login" method="POST" class="user">
                             <div class="form-group">
-                                <input type="email" class="form-control form-control-user"
-                                    id="exampleInputEmail" aria-describedby="emailHelp"
+                                <input asp-for="Username" class="form-control form-control-user"
                                     placeholder="Nhập tên tài khoản của bạn...">
+                                    <span class="text-danger" asp-validation-for="Username"></span>
                             </div>
                             <div class="form-group mt-2">
-                                <input type="password" class="form-control form-control-user"
-                                    id="exampleInputPassword" placeholder="Mật khẩu...">
+                                <input asp-for="Password" type="password" class="form-control form-control-user"
+                                   placeholder="Mật khẩu...">
+                                <span class="text-danger" asp-validation-for="Password"></span>
                             </div>
                             <div class="form-group mt-2">
                                 <div class="custom-control custom-checkbox small">
@@ -30,9 +33,9 @@
                                 </div>
                             </div>
 
-                            <a href="#" class="btn btn-primary btn-user btn-block mt-2 w-100">
+                            <button type="submit" class="btn btn-primary btn-user btn-block mt-2 w-100">
                                 Login
-                            </a>
+                            </button>
                         </form>
                     </div>
                 </div>
@@ -40,3 +43,7 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+} *@

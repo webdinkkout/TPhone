@@ -23,6 +23,8 @@ $(document).ready(function () {
         getAllProduct(categoryId, brandId, supplierId, searchKey);
     });
 
+
+
 })
 
 const getAllProduct = (categoryId, brandId, supplierId, key = "") => {
@@ -37,7 +39,7 @@ const getAllProduct = (categoryId, brandId, supplierId, key = "") => {
                 htmlResult += `
                 
                 <tr>
-                    <td colspan="6">
+                    <td colspan="8">
                         Danh sách rỗng 	&nbsp;	&nbsp;
                         <a href="/Admin/Product/Create" class="btn btn-success">
                             <i class="bi bi-plus-circle"></i>
@@ -52,18 +54,20 @@ const getAllProduct = (categoryId, brandId, supplierId, key = "") => {
                 htmlResult += `
                     <tr>
                         <th style="line-height: 48px" scope="row">${item.id}</th>
-                        <td style="line-height: 48px" >${item.productName}</td>
+                        <td style="line-height: 48px" title="${item.productName}">${item.productName.length > 12 ? item.productName.substring(0, 18) + "..." : item.productName}</td>
                         <td style="line-height: 48px" >${handleConvertNumberToMoney(item.price, "VND")}</td>
                         <td style="line-height: 48px" >${handleConvertNumberToMoney(item.quantity)}</td>
                         <td >
                             <img class="img-fluid" style="width: 48px;height: 48px;object-fit: cover;object-position: center;" src="${item.thumbnailFilePath}" alt="${item.seoName}">
                         </td>
+                        <td style="line-height: 48px" ><button class="btnIsHome ${item.isHot ? "active" : ""}">${item.isHot ? '<i style="color: blue; font-size: 20px;" class="bi bi-check"></i>' : '<i style="color: red; font-size: 20px;" class="bi bi-x"></i>'}</button></td>
+                        <td style="line-height: 48px" ><button class="btnIsHome"><i style="color: red; font-size: 20px;" class="bi bi-x"></i></button></td>
                         <td style="line-height: 48px">
-                            <a class="btn btn-danger" data-id="${item.id}" onclick="deleteProduct(${item.id})">
+                            <a class="btn btn-danger btn-sm" data-id="${item.id}" onclick="deleteProduct(${item.id})">
                                 <i class="bi bi-x-circle"></i>
                                 Xóa
                             </a>
-                            <a  asp-action="Edit"  asp-route-id="${item.id}" class="btn btn-primary">
+                            <a  href="/Admin/Product/Edit?id=${item.id}" class="btn btn-primary btn-sm">
                                 <i class="bi bi-pencil-square"></i>
                                 Chỉnh sửa</a>
                         </td>
@@ -71,6 +75,7 @@ const getAllProduct = (categoryId, brandId, supplierId, key = "") => {
                 `
             })
             $("#tblProducts").html(htmlResult);
+
         },
         error: function (err) {
         }
@@ -118,3 +123,14 @@ const deleteProduct = (idProduct) => {
 
 
 }
+
+
+$(document).on("click", ".btnIsHome", function () {
+    if (!$(this).hasClass("active")) {
+        $(this).addClass("active");
+        $(this).html(`<i style="color: blue; font-size: 20px;" class="bi bi-check"></i>`);
+    } else {
+        $(this).html(`<i style="color: red; font-size: 20px;" class="bi bi-x"></i>`);
+        $(this).removeClass("active");
+    }
+})

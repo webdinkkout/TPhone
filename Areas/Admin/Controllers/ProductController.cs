@@ -1,13 +1,14 @@
-using CellPhoneS.Areas.Admin.Models.EditModels.Product;
-using CellPhoneS.Areas.Admin.Models.ViewModels;
 using CellPhoneS.Interfaces;
-using CellPhoneS.Models.DomainModels;
+using CellPhoneS.Models;
 using CellPhoneS.Utils;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CellPhoneS.Areas.Admin.Controllers;
 
 [Area("Admin")]
+[Authorize(Roles = "Admin")]
 public class ProductController : Controller
 {
     private readonly IProductService productService;
@@ -26,18 +27,14 @@ public class ProductController : Controller
     [HttpGet]
     public IActionResult Index()
     {
-        var categories = this.productCategoryService.FindAll();
-        var brands = this.brandService.FindAll();
-        var suppliers = this.supplierService.FindAll();
+        var productCategories = this.productCategoryService.FindAll().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() });
+        var brands = this.brandService.FindAll().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() });
+        var suppliers = this.supplierService.FindAll().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() });
 
-        var productViewModel = new ProductViewModel
-        {
-            ProductCategories = categories,
-            Brands = brands,
-            Suppliers = suppliers
-        };
-
-        return View(productViewModel);
+        ViewBag.BRANDS = brands;
+        ViewBag.SUPPLIERS = suppliers;
+        ViewBag.PRODUCT_CATEGORIES = productCategories;
+        return View();
     }
 
     [HttpGet]
@@ -52,54 +49,31 @@ public class ProductController : Controller
     {
         this.productService.DeleteById(id);
 
-        return Json(new { OK = true });
+        return Json(new { success = true });
     }
 
     [HttpGet]
     public IActionResult Create()
     {
-        var productCategories = this.productCategoryService.FindAll();
-        var brands = this.brandService.FindAll();
-        var suppliers = this.supplierService.FindAll();
-        var createProduct = new CreateProduct
-        {
-            ProductCategories = productCategories,
-            Brands = brands,
-            Suppliers = suppliers
-        };
+        var productCategories = this.productCategoryService.FindAll().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() });
+        var brands = this.brandService.FindAll().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() });
+        var suppliers = this.supplierService.FindAll().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() });
 
-        return View(createProduct);
+        ViewBag.BRANDS = brands;
+        ViewBag.SUPPLIERS = suppliers;
+        ViewBag.PRODUCT_CATEGORIES = productCategories;
+        return View();
     }
 
     [HttpPost]
-    public IActionResult Create(CreateProduct payload, IFormFile? fileThumbnail)
+    public IActionResult Create(Product payload, IFormFile? fileThumbnail)
     {
-
-        TempData["TOAST"] = "ERROR|Tạo sản phẩm thất bại";
-
-        if (!ModelState.IsValid)
-        {
-
-            return View();
-        }
         var thumbnails = new HandleFile("images/product").Save(fileThumbnail);
-        var createProduct = new Product
-        {
-            ProductName = payload.ProductName,
-            Price = payload.Price,
-            PromotionPrice = payload.PromotionPrice,
-            Quantity = payload.Quantity,
-            IsHot = payload.IsHot,
-            Desc = payload.Desc,
-            ContentHtml = payload.ContentHtml,
-            ProductCategoryId = payload.ProductCategoryId,
-            BrandId = payload.BrandId,
-            SupplierId = payload.SupplierId,
-            ThumbnailFileName = thumbnails[0],
-            ThumbnailFilePath = thumbnails[1]
-        };
 
-        var createdProductSuccess = this.productService.Create(createProduct);
+        payload.ThumbnailFileName = thumbnails[0];
+        payload.ThumbnailFilePath = thumbnails[1];
+
+        var createdProductSuccess = this.productService.Create(payload);
 
         if (createdProductSuccess)
         {
@@ -107,6 +81,51 @@ public class ProductController : Controller
             return RedirectToAction("Index");
         }
 
+        TempData["TOAST"] = "ERROR|Tạo sản phẩm thất bại";
         return View();
     }
+
+    [HttpGet]
+    public IActionResult Edit(int id)
+    {
+        var editProduct = this.productService.FindById(id);
+
+        if (editProduct == null)
+        {
+            return NotFound();
+        }
+
+        var productCategories = this.productCategoryService.FindAll().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() });
+        var brands = this.brandService.FindAll().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() });
+        var suppliers = this.supplierService.FindAll().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() });
+
+        ViewBag.BRANDS = brands;
+        ViewBag.SUPPLIERS = suppliers;
+        ViewBag.PRODUCT_CATEGORIES = productCategories;
+        return View(editProduct);
+    }
+
+    [HttpPost]
+    public IActionResult Update(Product payload, IFormFile? fileThumbnail)
+    {
+        string[] thumbnails = new string[] { payload.ThumbnailFileName, payload.ThumbnailFilePath };
+        if (fileThumbnail != null)
+        {
+            new HandleFile("images/product").Delete(thumbnails[0]);
+            thumbnails = new HandleFile("images/product").Save(fileThumbnail);
+        }
+
+        payload.ThumbnailFileName = thumbnails[0];
+        payload.ThumbnailFilePath = thumbnails[1];
+
+        var updatedProductSuccess = this.productService.Update(payload);
+        if (!updatedProductSuccess)
+        {
+            return View();
+        }
+
+        TempData["TOAST"] = "SUCCESS|Chỉnh sửa sản phẩm thành công";
+        return RedirectToAction("Index");
+    }
+
 }

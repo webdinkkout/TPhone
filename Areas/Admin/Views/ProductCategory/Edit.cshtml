@@ -1,4 +1,4 @@
-@model EditProductCategory;
+@model ProductCategory;
 
 @{
     ViewData["Title"] = "Product Categories | Edit";
@@ -12,6 +12,7 @@
         <form asp-action="Update" method="POST" enctype="multipart/form-data">
             <input hidden asp-for="Id">
             <input hidden asp-for="ThumbnailFilePath">
+            <input hidden asp-for="CreatedAt">
             <div class="form-group">
                 <label for="txtName" class="form-label">Tên danh mục</label>
                 <input asp-for="Name" id="txtName" class="form-control" placeholder="Nhập tên danh mục">

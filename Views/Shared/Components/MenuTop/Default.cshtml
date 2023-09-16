@@ -1,0 +1,13 @@
+@model IEnumerable<Menu>
+
+    @if(Model != null && Model.Any()) {
+         <nav class="nav-menu-top">
+            @foreach(var item in Model) {
+                if(item.Alias.StartsWith("/") || item.Alias.StartsWith("http") ) {
+                    <a href="@item.Alias">@item.Title</a>
+                }else {
+                    <a href="/@item.Alias">@item.Title</a>
+                }
+            }
+        </nav>
+    }

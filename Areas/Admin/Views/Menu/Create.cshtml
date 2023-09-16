@@ -1,0 +1,42 @@
+@model Menu;
+
+@{
+     ViewData["Title"] = "Create | Menu";
+}
+
+
+<div class="container">
+    <section>
+        <h2>Tạo menu</h2>
+        <hr>
+        <form asp-action="Create" method="POST">
+            <div class="form-group">
+                <label for="" class="form-label">Tiêu đề</label>
+                <input class="form-control" asp-for="Title" placeholder="Nhập tiêu đề" >
+                <span class="text-danger" asp-validation-for="Title"></span>
+            </div>
+            <div class="form-group mt-2">
+                <label for="" class="form-label">Mô tả</label>
+                <input class="form-control" asp-for="Description" placeholder="Nhập mô tả...">
+                <span class="text-danger" asp-validation-for="Description"></span>
+            </div>
+            <div class="form-group mt-2">
+                <label for="" class="form-label" >Thứ tự</label>
+                <input class="form-control" asp-for="Position" placeholder="Nhập thứ tự">
+            </div>
+
+            <div class="form-group mt-2">
+                <a asp-action="Index" class="btn btn-danger">
+                    Trở về
+                </a>
+                <button type="submit" class="btn btn-primary">
+                    Tạo mới
+                </button>
+            </div>
+        </form>
+    </section>
+</div>
+
+@section Scripts {
+    <partial  name="_ValidationScriptsPartial"/>
+}
