@@ -32,7 +32,7 @@ public class AboutController : Controller
     public IActionResult Update(About about)
     {
         this.aboutService.Update(about);
-
+        TempData["TOAST"] = "SUCCESS|Chỉnh sửa thành công";
         return RedirectToAction("Edit");
     }
 

@@ -1,4 +1,4 @@
-﻿@{
+@{
 
 }
 
@@ -15,6 +15,16 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/CellPhoneS.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <style>
+        .item-search:hover {
+            background-color: rgba(0,0,0,0.2);
+        }
+
+        .item-search> a {
+            display:block;
+            padding: 8px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -25,7 +35,7 @@
                     <vc:menu-top/>
                 </div>
                 <div class="header__right d-flex items-center">
-                    <button><i class="bi bi-search"></i></button>
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#searchProduct"><i class="bi bi-search"></i></button>
                     <button><i class="bi bi-bag"></i></button>
                     <partial name="_LoginPartial" />
                 </div>
@@ -57,10 +67,72 @@
             </div>
         </footer>
     </div>
+    <!-- Large modal -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="searchProduct" tabindex="-1" aria-labelledby="searchProductLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="form-group d-flex align-items-center gap-2 mb-4">
+                        <input class="form-control" id="txtSearchProduct" />
+                        <button id="btnSearchProduct" class="btn btn-primary"><i class="bi bi-search"></i></button>
+                    </div>
+                    @* Show when result data *@
+                    <div id="resultSearch" class="shadow" style="border-radius:8px;padding:16px;">
+                        <ul id="reuslt">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        $("#btnSearchProduct").click(function () {
+            const value = $("#txtSearchProduct").val();
+            $.ajax({
+                type: "GET",
+                url: `/Home/SearchProduct?key=${value}`,
+
+                success: function (res) {
+                    let htmlResult = "";
+
+                    if (res.data.length <= 0) {
+                        htmlResult += `
+                        `
+                    }
+
+                    res.data.forEach((item) => {
+                        htmlResult += `
+                                  <li class="item-search d-flex align-items-center px-2" style="border-radius: 8px"  >
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+                                            <g clip-path="url(#clip0_11_476)">
+                                                <path d="M8 15.5C6.14348 15.5 4.36301 14.7625 3.05025 13.4497C1.7375 12.137 1 10.3565 1 8.5C1 6.64348 1.7375 4.86301 3.05025 3.55025C4.36301 2.2375 6.14348 1.5 8 1.5C9.85652 1.5 11.637 2.2375 12.9497 3.55025C14.2625 4.86301 15 6.64348 15 8.5C15 10.3565 14.2625 12.137 12.9497 13.4497C11.637 14.7625 9.85652 15.5 8 15.5ZM8 16.5C10.1217 16.5 12.1566 15.6571 13.6569 14.1569C15.1571 12.6566 16 10.6217 16 8.5C16 6.37827 15.1571 4.34344 13.6569 2.84315C12.1566 1.34285 10.1217 0.5 8 0.5C5.87827 0.5 3.84344 1.34285 2.34315 2.84315C0.842855 4.34344 0 6.37827 0 8.5C0 10.6217 0.842855 12.6566 2.34315 14.1569C3.84344 15.6571 5.87827 16.5 8 16.5Z" fill="black" />
+                                                <path d="M10.9701 5.46998C10.963 5.47688 10.9563 5.48423 10.9501 5.49198L7.47709 9.91698L5.38409 7.82298C5.24192 7.6905 5.05387 7.61837 4.85957 7.6218C4.66527 7.62523 4.47989 7.70394 4.34247 7.84135C4.20506 7.97877 4.12635 8.16415 4.12292 8.35845C4.11949 8.55275 4.19161 8.7408 4.32409 8.88298L6.97009 11.53C7.04138 11.6011 7.12626 11.6572 7.21968 11.6948C7.3131 11.7325 7.41314 11.7509 7.51384 11.749C7.61454 11.7472 7.71383 11.725 7.80579 11.684C7.89775 11.6429 7.9805 11.5837 8.04909 11.51L12.0411 6.51998C12.177 6.37731 12.2513 6.18687 12.248 5.98984C12.2446 5.79282 12.1639 5.60502 12.0231 5.46707C11.8824 5.32912 11.6931 5.25208 11.496 5.25263C11.299 5.25317 11.11 5.33125 10.9701 5.46998Z" fill="black" />
+                                            </g>
+                                            <defs>
+                                                <clipPath id="clip0_11_476">
+                                                    <rect width="16" height="16" fill="white" transform="translate(0 0.5)" />
+                                                </clipPath>
+                                            </defs>
+                                        </svg>
+                                        <a href="/san-pham/detail/${item.id}" style="width: 100%;">${item.productName}</a>
+                                    </li>
+                        `
+                    })
+                    $("#reuslt").html(htmlResult);
+
+                },
+                error: function (err) {
+                }
+            })
+        });
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

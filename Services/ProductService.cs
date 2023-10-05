@@ -35,6 +35,30 @@ public class ProductService : BaseService<Product>, IProductService
         return base.DeleteById(id);
     }
 
+    public List<Product> FindProductByCategoryId(int? categoruId)
+    {
+        List<Product> products = new List<Product>();
+        if (!categoruId.HasValue)
+        {
+            return products;
+        }
+
+        products = _dbContext.Products.Where(x => x.ProductCategoryId == categoruId).ToList();
+
+        return products;
+    }
+
+    public List<Product> SearchAllProduct(string key)
+    {
+        var listProduct = _dbContext.Products;
+
+        var result = from x in listProduct
+                     where x.ProductName.Contains(key)
+                     select x;
+
+        return result.ToList();
+    }
+
     public List<Product> SearchProduct(int? categoryId, int? brandId, int? supplierId, string name)
     {
         IQueryable<Product> query = this._dbContext.Products;

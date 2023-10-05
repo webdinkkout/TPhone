@@ -1,0 +1,67 @@
+@model Product
+
+<div class="container">
+
+    <div class="row mb-4">
+        <div class="col-4">
+            <img src="@Model.ThumbnailFilePath" alt="@Model.ProductName" style="border-radius: 16px;background-color:white;" class="img-fluid" width="100%" height="100%" />
+        </div>
+        <div class="col-8">
+            <h1>
+                @Model.ProductName
+            </h1>
+            <p>
+                @Model.Desc
+            </p>
+            <hr />
+            <p style="font-size: 14px; color:#555; text-decoration: line-through">
+                @Model.Price VNĐ
+            </p>
+            <p style="font-weight:700; color: red">
+                @Model.PromotionPrice VNĐ
+            </p>
+            <button class="btn btn-primary">
+                Thêm vào vỏ hàng
+            </button>
+            <br />
+            <p>
+                @Html.Raw(System.Web.HttpUtility.HtmlDecode(Model.ContentHtml))
+            </p>
+        </div>
+    </div>
+    @if (ViewBag.RELATION_PRODUCTS.Count > 0)
+    {
+        <div class="row">
+            <h3 class="mb-2">
+                Sản phẩm liên quan
+            </h3>
+            @foreach (var product in ViewBag.RELATION_PRODUCTS)
+            {
+                <div class="col-3">
+                    <div class="card-product shadow" style="padding: 32px; border-radius:16px;background: #fff;text-align:center;">
+                        <div class="card-top" style="margin-bottom: 16px;">
+                            <img src="@product.ThumbnailFilePath" alt="@product.ProductName" width="150" height="150" />
+                        </div>
+                        <div class="card-body">
+                            @if (product.IsHot)
+                            {
+                                <span style="color: red; font-size: 12px;text-align:left; display:block;">Mới</span>
+                            }
+                            <h5 style="text-align: left; margin:16px 0;">
+                                <a href="/san-pham/detail/@product.Id">
+                                    @product.ProductName
+                                </a>
+                            </h5>
+                            <div style="text-align:left;font-size:14px;">
+                                <span style="font-weight: 700;color:red;">@product.PromotionPrice VNĐ</span>
+                                <span style="text-decoration: line-through; color:#555;">@product.Price VNĐ</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+   
+
+</div>

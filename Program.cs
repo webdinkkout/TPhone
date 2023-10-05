@@ -1,12 +1,11 @@
-using System.Text.Json.Serialization;
 using CellPhoneS.Data;
 using CellPhoneS.Interfaces;
 using CellPhoneS.Models;
 using CellPhoneS.Services;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -107,6 +106,7 @@ app.UseAuthorization();
 
 
 app.MapRazorPages();
+
 app.MapControllerRoute(
       name: "areasRoute",
       pattern: "{area:exists}/{controller=Admin}/{action=Index}"
@@ -120,6 +120,30 @@ app.MapControllerRoute(
     name: "default",
     pattern: "gioi-thieu/{slug?}",
     defaults: new { controller = "About", action = "Index" }
+);
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "san-pham",
+    defaults: new { controller = "Home", action = "Product" }
+);
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "san-pham/detail/{id?}",
+    defaults: new { controller = "Home", action = "Detail" }
+);
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "danh-muc-san-pham",
+    defaults: new { controller = "Home", action = "Category" }
+);
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "danh-muc-san-pham/detail/{id?}",
+    defaults: new { controller = "Home", action = "DetailCategory" }
 );
 
 using (var scope = app.Services.CreateScope())

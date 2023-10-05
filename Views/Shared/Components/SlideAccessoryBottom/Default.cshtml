@@ -2,7 +2,7 @@
 
 @if(Model != null && Model.Any()) {
      <section class="wrapper-phu-kien">
-        <h2 class="title-highlight wrapper-home__title">
+        <h2 class="title-highlight wrapper-home__title mb-2">
             Phụ kiện. 
             <span>Tạo nét riêng cho quà mà họ thích.</span>
         </h2>
@@ -16,7 +16,7 @@
                                 <div class="card-product-primary__header">
                                     <h4 class="card-product-primary__title">@item.ProductName</h4>
                                     <h3 class="card-product-primary__sub-title">
-                                        <a href="#">
+                                        <a href="/san-pham/detail/@item.Id">
                                             @item.ProductName
                                         </a>
                                     </h3>
